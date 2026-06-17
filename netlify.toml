@@ -1,6 +1,18 @@
 [build]
   publish = "."
 
+[[redirects]]
+  from = "/gestaoworknet"
+  to = "https://duiliodutra.github.io/gestao-sistema/"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/gestaoworknet/*"
+  to = "https://duiliodutra.github.io/gestao-sistema/:splat"
+  status = 200
+  force = true
+
 [[headers]]
   for = "/*"
   [headers.values]
