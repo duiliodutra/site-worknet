@@ -719,8 +719,6 @@ function render(d){
   ['nav-wpp','float-wpp','f-wpp','f-wpp2','mobile-wpp','hero-wpp'].forEach(id=>{
     const el=document.getElementById(id);if(el)el.href=wl;
   });
-  document.getElementById('stat-preco').textContent=cfg.statPreco||'R$60';
-  document.getElementById('stat-cidades').textContent=cfg.statCidades||'9';
 
   document.getElementById('c-wpp').href=wl;
   document.getElementById('c-wpp').textContent=cfg.wppDisplay||cfg.wpp;
