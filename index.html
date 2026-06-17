@@ -11,263 +11,314 @@
 <link rel="icon" href="https://static.wixstatic.com/media/6baf7f_efd3c7b6dff74868a512df7ad14be321~mv2.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-/* ── RESET & TOKENS ── */
+/* ── TOKENS ── */
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
+  --blue:#1040c1;
+  --blue-hover:#0c3299;
+  --blue-light:#2255e0;
+  --blue-xlight:#eef2ff;
   --ink:#0a1628;
   --ink2:#1c2e4a;
-  --blue:#1040c1;
-  --blue-light:#2255e0;
-  --blue-dark:#0c3299;
-  --blue-glow:rgba(16,64,193,.15);
-  --white:#ffffff;
-  --off:#f0f4ff;
   --muted:#5a6478;
+  --muted2:#7a8aa0;
+  --white:#ffffff;
+  --surface:#f0f4ff;
   --border:#dde3f0;
+  --border2:#c8d2e8;
   --wpp:#25d366;
+  --wpp-hover:#1faa52;
+  --radius-sm:8px;
   --radius:12px;
-  --radius-lg:16px;
-  --shadow:0 4px 24px rgba(16,64,193,.1);
-  --card-shadow:0 2px 16px rgba(10,22,40,.06);
+  --radius-lg:18px;
+  --radius-xl:24px;
+  --shadow-sm:0 1px 4px rgba(10,20,50,.06),0 2px 10px rgba(10,20,50,.04);
+  --shadow:0 4px 16px rgba(10,20,50,.08),0 1px 4px rgba(10,20,50,.04);
+  --shadow-lg:0 12px 40px rgba(10,20,50,.12),0 4px 12px rgba(10,20,50,.06);
+  --shadow-blue:0 8px 32px rgba(16,64,193,.25);
   --ease:cubic-bezier(.4,0,.2,1);
+  --trans:.18s var(--ease);
 }
-html{scroll-behavior:smooth}
-body{font-family:'Inter',system-ui,sans-serif;color:var(--ink);background:var(--white);-webkit-font-smoothing:antialiased;line-height:1.5}
-img{max-width:100%;height:auto}
-a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
-.skip-link{position:absolute;top:-100px;left:1rem;background:var(--blue);color:white;padding:.75rem 1rem;border-radius:8px;font-weight:700;z-index:9999;text-decoration:none}
+html{scroll-behavior:smooth;-webkit-tap-highlight-color:transparent}
+body{font-family:'Inter',system-ui,sans-serif;color:var(--ink);background:var(--white);-webkit-font-smoothing:antialiased;line-height:1.5;overflow-x:hidden}
+img{max-width:100%;height:auto;display:block}
+a{color:inherit}
+a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:4px}
+.skip-link{position:absolute;top:-100px;left:1rem;background:var(--blue);color:white;padding:.75rem 1.25rem;border-radius:8px;font-weight:700;z-index:9999;text-decoration:none;font-size:14px}
 .skip-link:focus{top:1rem}
 
+/* ── TOP BAR ── */
+.top-bar{background:linear-gradient(90deg,var(--blue-hover) 0%,var(--blue) 100%);padding:9px 2rem}
+.top-bar-inner{max-width:1240px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap}
+.top-bar-text{color:rgba(255,255,255,.65);font-size:12.5px;font-weight:500;letter-spacing:.1px}
+.top-bar-text strong{color:rgba(255,255,255,.9);font-weight:700}
+.top-bar-link{display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.14);color:rgba(255,255,255,.85);padding:5px 14px;border-radius:50px;font-size:12px;font-weight:700;text-decoration:none;transition:background var(--trans),color var(--trans);white-space:nowrap;letter-spacing:.2px}
+.top-bar-link:hover{background:rgba(255,255,255,.18);color:white}
+
 /* ── NAV ── */
-nav{position:sticky;top:0;z-index:200;background:var(--white);height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 2rem;border-bottom:1px solid var(--border);box-shadow:0 2px 12px rgba(0,0,0,.04)}
-.nav-brand{display:flex;align-items:center;gap:12px;text-decoration:none}
-.nav-brand img{height:38px;width:auto}
-.nav-brand-text{color:var(--ink);font-size:13px;font-weight:700;letter-spacing:.3px;line-height:1.2}
-.nav-brand-text em{display:block;font-style:normal;font-size:10px;font-weight:500;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-top:1px}
-.nav-right{display:flex;align-items:center;gap:16px}
-.nav-links{display:flex;align-items:center;gap:24px}
-.nav-links a{color:var(--muted);text-decoration:none;font-size:13px;font-weight:500;transition:color .15s}
-.nav-links a:hover{color:var(--ink)}
-.nav-wpp{background:var(--blue);color:white!important;padding:9px 20px;border-radius:8px;font-size:13px;font-weight:700!important;transition:background .15s,transform .15s}
-.nav-wpp:hover{background:var(--blue-dark)!important;transform:translateY(-1px)}
-.nav-toggle{display:none;background:none;border:none;color:var(--ink);font-size:24px;cursor:pointer;padding:8px;border-radius:8px;line-height:1}
-.nav-toggle:hover{background:var(--off)}
-.mobile-menu{display:none;position:fixed;top:64px;left:0;right:0;background:var(--white);border-bottom:1px solid var(--border);padding:1rem 1.5rem 1.5rem;z-index:199;flex-direction:column;gap:4px;box-shadow:0 12px 32px rgba(0,0,0,.08)}
+nav{position:sticky;top:0;z-index:200;height:66px;display:flex;align-items:center;justify-content:space-between;padding:0 2rem;background:rgba(255,255,255,.95);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--border);box-shadow:0 1px 0 var(--border),0 4px 24px rgba(10,20,50,.04)}
+.nav-brand{display:flex;align-items:center;gap:11px;text-decoration:none}
+.nav-brand img{height:36px;width:auto}
+.nav-brand-text{color:var(--ink);font-size:12.5px;font-weight:800;letter-spacing:.4px;line-height:1.2;text-transform:uppercase}
+.nav-brand-text em{display:block;font-style:normal;font-size:10px;font-weight:500;color:var(--muted);letter-spacing:.8px;text-transform:uppercase;margin-top:1px}
+.nav-right{display:flex;align-items:center;gap:8px}
+.nav-links{display:flex;align-items:center;gap:4px}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:13px;font-weight:600;padding:7px 12px;border-radius:8px;transition:color var(--trans),background var(--trans)}
+.nav-links a:hover{color:var(--ink);background:var(--surface)}
+.nav-cta{background:var(--blue);color:white!important;padding:9px 22px!important;border-radius:50px!important;font-size:13px!important;font-weight:700!important;letter-spacing:.2px;box-shadow:var(--shadow-blue);transition:background var(--trans),transform var(--trans),box-shadow var(--trans)!important}
+.nav-cta:hover{background:var(--blue-hover)!important;transform:translateY(-1px);box-shadow:0 10px 36px rgba(16,64,193,.32)!important}
+.nav-toggle{display:none;background:none;border:1px solid var(--border);color:var(--ink);font-size:18px;cursor:pointer;padding:7px 10px;border-radius:8px;line-height:1;transition:background var(--trans),border-color var(--trans)}
+.nav-toggle:hover{background:var(--surface);border-color:var(--border2)}
+
+/* ── MOBILE MENU ── */
+.mobile-menu{display:none;position:fixed;top:66px;left:0;right:0;background:white;border-bottom:1px solid var(--border);padding:1rem 1.5rem 1.5rem;z-index:199;flex-direction:column;gap:4px;box-shadow:0 16px 40px rgba(0,0,0,.1)}
 .mobile-menu.open{display:flex}
-.mobile-menu a{color:var(--ink2);text-decoration:none;font-size:15px;font-weight:600;padding:12px 0;border-bottom:1px solid var(--border)}
-.mobile-menu a:last-child{border-bottom:none;margin-top:8px}
-.mobile-menu .nav-wpp{text-align:center;display:block}
+.mobile-menu a{color:var(--ink2);text-decoration:none;font-size:15px;font-weight:600;padding:13px 0;border-bottom:1px solid var(--border);display:block}
+.mobile-menu a:last-child{border-bottom:none;margin-top:6px}
+.mobile-menu .nav-cta{text-align:center;border-radius:12px!important;padding:13px!important;font-size:14px!important;background:var(--blue)!important}
 
-/* ── TOP CENTRAL BAR ── */
-.top-central{background:linear-gradient(90deg,var(--blue-dark) 0%,var(--blue) 100%);padding:10px 2rem;border-bottom:1px solid rgba(255,255,255,.1)}
-.top-central-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap}
-.top-central-text{color:rgba(255,255,255,.85);font-size:13px;font-weight:500}
-.top-central-text strong{color:white;font-weight:700}
-.top-central-btn{display:inline-flex;align-items:center;gap:6px;background:white;color:var(--blue-dark);padding:7px 18px;border-radius:8px;font-size:13px;font-weight:800;text-decoration:none;white-space:nowrap;transition:transform .15s,box-shadow .15s;box-shadow:0 2px 12px rgba(0,0,0,.15)}
-.top-central-btn:hover{transform:translateY(-1px);box-shadow:0 4px 18px rgba(0,0,0,.22)}
+/* ── HERO ── */
+.hero{position:relative;min-height:480px;display:flex;align-items:center;overflow:hidden;background:var(--ink)}
+.hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:60% center;opacity:1;transition:opacity .8s}
+.hero-gradient{position:absolute;inset:0;background:linear-gradient(90deg,rgba(10,22,40,.9) 0%,rgba(10,22,40,.62) 42%,rgba(16,64,193,.22) 68%,rgba(16,64,193,.08) 100%);pointer-events:none}
+.hero-inner{position:relative;z-index:1;max-width:1240px;margin:0 auto;padding:3.5rem 2rem;width:100%}
+.hero-badge{display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.16);color:rgba(200,220,255,.9);font-size:11.5px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;padding:6px 14px;border-radius:50px;margin-bottom:1.25rem}
+.hero-badge::before{content:'';width:7px;height:7px;background:#22c55e;border-radius:50%;flex-shrink:0;box-shadow:0 0 0 3px rgba(34,197,94,.25)}
+.hero h1{font-size:clamp(28px,5vw,50px);font-weight:900;color:white;letter-spacing:-1.5px;line-height:1.08;margin-bottom:.9rem;max-width:580px}
+.hero h1 em{font-style:normal;color:#7eb4ff}
+.hero-sub{font-size:clamp(14px,1.8vw,16.5px);color:rgba(255,255,255,.6);line-height:1.65;margin-bottom:2rem;max-width:500px;font-weight:400}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.btn-hero{display:inline-flex;align-items:center;gap:8px;padding:14px 30px;border-radius:50px;font-size:14.5px;font-weight:700;text-decoration:none;transition:transform var(--trans),box-shadow var(--trans),background var(--trans);letter-spacing:.1px}
+.btn-hero-primary{background:var(--blue);color:white;box-shadow:var(--shadow-blue)}
+.btn-hero-primary:hover{background:var(--blue-light);transform:translateY(-2px);box-shadow:0 12px 40px rgba(16,64,193,.4)}
+.btn-hero-outline{background:rgba(255,255,255,.08);color:rgba(255,255,255,.9);border:1.5px solid rgba(255,255,255,.22)}
+.btn-hero-outline:hover{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.4);transform:translateY(-2px)}
+.hero-stats{display:flex;flex-wrap:wrap;gap:24px;margin-top:2.5rem;padding-top:2rem;border-top:1px solid rgba(255,255,255,.1)}
+.hero-stat{display:flex;flex-direction:column;gap:2px}
+.hero-stat strong{font-size:22px;font-weight:900;color:white;letter-spacing:-.5px;line-height:1}
+.hero-stat span{font-size:12px;color:rgba(255,255,255,.45);font-weight:500}
 
-/* ── HERO BANNER ── */
-.hero-banner{position:relative;min-height:340px;display:flex;align-items:center;overflow:hidden;background:linear-gradient(135deg,#0a1628 0%,#1040c1 100%)}
-.hero-banner-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:58% center}
-.hero-banner-overlay{position:absolute;inset:0;background:linear-gradient(90deg,rgba(10,22,40,.9) 0%,rgba(10,22,40,.62) 42%,rgba(16,64,193,.22) 68%,rgba(16,64,193,.08) 100%);pointer-events:none}
-.hero-banner-content{position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:2.75rem 2rem;width:100%}
-.hero-badge{display:inline-block;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);color:#c8daff;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:5px 12px;border-radius:20px;margin-bottom:1rem}
-.hero-banner h1{font-size:clamp(26px,4vw,42px);font-weight:900;color:white;letter-spacing:-.8px;line-height:1.1;margin-bottom:.75rem;max-width:560px}
-.hero-banner h1 span{color:#7eb4ff}
-.hero-banner-desc{font-size:15px;color:rgba(255,255,255,.72);line-height:1.6;margin-bottom:1.5rem;max-width:480px}
-.hero-actions{display:flex;flex-wrap:wrap;gap:10px}
-.btn-primary{display:inline-flex;align-items:center;justify-content:center;background:var(--blue);color:white;padding:13px 26px;border-radius:8px;font-size:14px;font-weight:700;text-decoration:none;transition:background .15s,transform .15s,box-shadow .15s;box-shadow:0 4px 16px rgba(16,64,193,.35)}
-.btn-primary:hover{background:var(--blue-light);transform:translateY(-1px);box-shadow:0 6px 22px rgba(16,64,193,.4)}
-.btn-outline{display:inline-flex;align-items:center;justify-content:center;background:transparent;color:white;border:1.5px solid rgba(255,255,255,.4);padding:13px 26px;border-radius:8px;font-size:14px;font-weight:600;text-decoration:none;transition:border-color .15s,background .15s,transform .15s}
-.btn-outline:hover{border-color:rgba(255,255,255,.75);background:rgba(255,255,255,.08);transform:translateY(-1px)}
-
-/* ── PERKS STRIP ── */
-.perks-strip{background:var(--white);border-bottom:1px solid var(--border);padding:0 2rem}
-.perks-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr)}
-.perk-item{padding:1.25rem 1rem;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;border-right:1px solid var(--border);min-height:72px}
-.perk-item:last-child{border-right:none}
-.perk-item strong{font-size:13px;font-weight:700;color:var(--ink)}
-.perk-item span{font-size:11px;color:var(--muted);line-height:1.35;max-width:180px}
+/* ── PERKS ── */
+.perks{background:white;border-bottom:1px solid var(--border)}
+.perks-inner{max-width:1240px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr)}
+.perk{padding:1.35rem 1.25rem;display:flex;align-items:center;gap:13px;border-right:1px solid var(--border);transition:background var(--trans)}
+.perk:last-child{border-right:none}
+.perk:hover{background:var(--surface)}
+.perk-icon{width:38px;height:38px;border-radius:10px;background:var(--blue-xlight);color:var(--blue);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.perk-icon svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.perk-text strong{display:block;font-size:13px;font-weight:700;color:var(--ink);line-height:1.2;margin-bottom:2px}
+.perk-text span{font-size:11.5px;color:var(--muted);line-height:1.3}
 
 /* ── SECTIONS ── */
-section{padding:4rem 2rem}
-.section-inner{max-width:1200px;margin:0 auto}
-.eyebrow{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--blue);margin-bottom:.75rem;display:block}
-.s-title{font-size:clamp(24px,3vw,34px);font-weight:800;letter-spacing:-.5px;margin-bottom:.6rem;line-height:1.15;color:var(--ink)}
-.s-sub{font-size:15px;color:var(--muted);margin-bottom:2rem;max-width:560px;line-height:1.55}
-.bg-off{background:var(--off)}
-.bg-ink{background:linear-gradient(145deg,var(--blue-dark) 0%,var(--blue) 50%,#0d1f3d 100%)}
-.reveal{opacity:0;transform:translateY(20px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
+section{padding:5rem 2rem}
+.section-inner{max-width:1240px;margin:0 auto}
+.eyebrow{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--blue);margin-bottom:.85rem}
+.eyebrow::before{content:'';width:20px;height:2px;background:var(--blue);border-radius:1px}
+.s-title{font-size:clamp(24px,3.5vw,36px);font-weight:900;letter-spacing:-1px;line-height:1.12;color:var(--ink);margin-bottom:.6rem}
+.s-sub{font-size:15px;color:var(--muted);line-height:1.6;max-width:560px;margin-bottom:2.5rem}
+.bg-surface{background:var(--surface)}
+.bg-dark{background:var(--ink)}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .65s var(--ease),transform .65s var(--ease)}
 .reveal.visible{opacity:1;transform:none}
 
-/* ── PLANOS (hero section) ── */
-#planos{padding:2rem 0 3.5rem;background:var(--off)}
+/* ── PLANS SECTION ── */
+#planos{padding:4rem 0;background:var(--surface)}
 #planos .section-inner{padding:0 2rem}
-.plans-toolbar{display:flex;justify-content:center;margin-bottom:1.25rem}
-.loc-selector-wrap{width:100%;max-width:960px;text-align:center}
-.loc-label{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;margin-bottom:.5rem;display:block}
-.loc-pills{display:flex;flex-wrap:wrap;justify-content:center;gap:6px}
-.loc-pill{padding:7px 14px;border-radius:50px;border:1px solid var(--border);background:white;font-size:13px;font-weight:600;color:var(--muted);cursor:pointer;transition:all .15s;font-family:inherit}
-.loc-pill:hover{border-color:var(--blue);color:var(--blue)}
-.loc-pill.active{background:var(--blue);border-color:var(--blue);color:white}
-.plans-count{font-size:12px;color:var(--muted);margin-bottom:1rem;font-weight:500;text-align:center}
 
-/* ── CAROUSEL ── */
-.plans-carousel-wrap{display:flex;justify-content:center;padding:0 2rem}
-.plans-carousel{display:inline-flex;width:max-content;max-width:100%;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding:1rem;padding:1rem 0 1.5rem;-webkit-overflow-scrolling:touch;scrollbar-width:thin;scrollbar-color:var(--border) transparent}
-.plans-carousel::-webkit-scrollbar{height:6px}
-.plans-carousel::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+.plans-header{text-align:center;margin-bottom:1.75rem}
+.plans-header .s-title{margin-bottom:.5rem}
+.plans-header .s-sub{margin:0 auto 1.5rem;text-align:center}
 
-/* ── PLAN CARDS (estilo Claro) ── */
-.plan-card{flex:0 0 280px;scroll-snap-align:start;background:white;border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.5rem 1.35rem 1.35rem;position:relative;transition:box-shadow .25s,border-color .25s;display:flex;flex-direction:column;align-items:stretch;text-align:center;box-shadow:var(--card-shadow);min-height:460px}
-.plan-card:hover{box-shadow:var(--shadow);border-color:#ddd}
-.plan-card.featured{border:2px solid var(--blue)}
-.plan-card.hidden-plan{display:none}
-.plan-badge{display:inline-block;background:var(--blue);color:white;font-size:10px;font-weight:800;padding:4px 12px;border-radius:4px;text-transform:uppercase;letter-spacing:.5px;margin:0 auto 1rem;align-self:center}
-.plan-brand{font-size:13px;font-weight:600;color:var(--muted);margin-bottom:.75rem}
-.plan-brand span{color:var(--blue);font-weight:800}
-.plan-speed-line{display:flex;align-items:baseline;justify-content:center;gap:6px;margin-bottom:.35rem}
-.plan-speed-num{font-size:52px;font-weight:900;color:var(--ink);line-height:1;letter-spacing:-2px}
-.plan-speed-unit{font-size:16px;font-weight:800;color:var(--ink);letter-spacing:.5px}
-.plan-streaming{font-size:13px;font-weight:600;color:var(--ink2);margin-bottom:.85rem;line-height:1.35}
-.plan-streaming-logos{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px;margin-bottom:.85rem;min-height:32px}
-.plan-streaming-logos img{height:28px;width:auto;max-width:120px;object-fit:contain}
-.plan-streaming-logos img.logo-watch{height:32px;max-width:140px}
-.plan-locs{display:flex;flex-wrap:wrap;justify-content:center;gap:5px;margin-bottom:.75rem}
-.plan-loc-tag{background:#e8eeff;color:var(--blue);font-size:10px;font-weight:700;padding:3px 9px;border-radius:20px;text-transform:uppercase;letter-spacing:.4px}
-.plan-feats{list-style:none;margin:0 auto 1rem;flex:1;width:100%;max-width:220px;text-align:left}
-.plan-feats li{font-size:12px;color:var(--ink2);padding:5px 0;display:flex;align-items:flex-start;gap:8px;line-height:1.4;border-bottom:1px solid var(--off)}
-.plan-feats li:last-child{border-bottom:none}
-.plan-feats li::before{content:'';width:16px;height:16px;border-radius:50%;background:var(--blue);flex-shrink:0;margin-top:1px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3 8l3.5 3.5L13 5' stroke='white' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:center;background-size:10px}
-.plan-divider{border:none;border-top:1px solid var(--border);margin:.25rem 0 1rem;width:100%}
+.loc-label{font-size:11.5px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;margin-bottom:.6rem;display:block;text-align:center}
+.loc-pills{display:flex;flex-wrap:wrap;justify-content:center;gap:7px;max-width:800px;margin:0 auto}
+.loc-pill{padding:7px 16px;border-radius:50px;border:1.5px solid var(--border2);background:white;font-size:13px;font-weight:600;color:var(--muted);cursor:pointer;transition:all var(--trans);font-family:inherit;box-shadow:var(--shadow-sm)}
+.loc-pill:hover{border-color:var(--blue);color:var(--blue);background:var(--blue-xlight)}
+.loc-pill.active{background:var(--blue);border-color:var(--blue);color:white;box-shadow:var(--shadow-blue)}
+
+.plans-count{font-size:12.5px;color:var(--muted);text-align:center;margin:1rem 0;font-weight:500}
+
+/* ── PLANS GRID ── */
+.plans-carousel-wrap{padding:0 2rem}
+.plans-carousel{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;padding:1rem 0 1.5rem;align-items:start}
+
+/* ── PLAN CARDS ── */
+.plan-card{background:white;border:1.5px solid var(--border);border-radius:var(--radius-xl);padding:1.5rem 1.3rem 1.3rem;position:relative;transition:box-shadow var(--trans),border-color var(--trans),transform var(--trans);display:flex;flex-direction:column;align-items:stretch;text-align:center;box-shadow:var(--shadow-sm)}
+.plan-card:hover{box-shadow:var(--shadow-lg);border-color:var(--border2);transform:translateY(-3px)}
+.plan-card.featured{border-color:var(--blue);border-width:2px;box-shadow:0 0 0 4px rgba(16,64,193,.06),var(--shadow)}
+.plan-card.featured:hover{box-shadow:0 0 0 4px rgba(16,64,193,.1),var(--shadow-lg)}
+.plan-badge{display:inline-flex;align-items:center;gap:5px;background:var(--blue);color:white;font-size:10.5px;font-weight:800;padding:5px 13px;border-radius:50px;text-transform:uppercase;letter-spacing:.6px;margin:0 auto .9rem;align-self:center}
+.plan-badge::before{content:'★';font-size:9px;opacity:.8}
+.plan-brand{font-size:12px;font-weight:600;color:var(--muted2);margin-bottom:.5rem;letter-spacing:.3px}
+.plan-brand strong{color:var(--blue);font-weight:800}
+.plan-speed-line{display:flex;align-items:baseline;justify-content:center;gap:4px;margin-bottom:.25rem}
+.plan-speed-num{font-size:64px;font-weight:900;color:var(--ink);line-height:1;letter-spacing:-4px}
+.plan-speed-unit{font-size:16px;font-weight:800;color:var(--muted);letter-spacing:.5px;margin-bottom:4px}
+.plan-streaming{font-size:12.5px;font-weight:600;color:var(--muted);margin-bottom:.6rem;line-height:1.3}
+.plan-streaming-logos{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px;margin-bottom:.8rem;min-height:30px}
+.plan-streaming-logos img{height:26px;width:auto;max-width:110px;object-fit:contain}
+.plan-streaming-logos img.logo-watch{height:30px;max-width:130px}
+.plan-extra-tag{font-size:11px;font-weight:700;color:var(--muted);background:var(--surface);padding:3px 8px;border-radius:4px}
+.plan-locs{display:flex;flex-wrap:wrap;justify-content:center;gap:5px;margin-bottom:.7rem}
+.plan-loc-tag{background:var(--blue-xlight);color:var(--blue);font-size:10px;font-weight:700;padding:3px 9px;border-radius:20px;text-transform:uppercase;letter-spacing:.4px}
+.plan-divider{border:none;border-top:1px solid var(--border);margin:.5rem 0 1rem;width:100%}
+
+/* Price */
 .plan-price-block{margin-bottom:1rem;width:100%}
-.plan-price-label{display:block;font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px}
+.plan-price-label{display:block;font-size:10.5px;font-weight:700;color:var(--muted2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:3px}
 .plan-price-row{display:flex;align-items:flex-start;justify-content:center;line-height:1;color:var(--ink)}
-.plan-price-currency{font-size:18px;font-weight:700;margin-top:8px;margin-right:2px}
-.plan-price-int{font-size:48px;font-weight:900;letter-spacing:-2px}
-.plan-price-cents{font-size:22px;font-weight:800;margin-top:6px}
-.plan-price-period{font-size:13px;font-weight:600;color:var(--muted);align-self:flex-end;margin-bottom:6px;margin-left:2px}
-.plan-price-note{font-size:11px;color:var(--muted);margin-top:6px;line-height:1.4;max-width:240px;margin-left:auto;margin-right:auto}
-.plan-cta{display:block;width:100%;padding:13px;border-radius:8px;font-size:14px;font-weight:700;text-align:center;text-decoration:none;cursor:pointer;border:none;background:var(--blue);color:white;transition:background .15s,transform .15s;font-family:inherit}
-.plan-cta:hover{background:var(--blue-dark);transform:translateY(-1px)}
-.plan-details{display:block;width:100%;padding:10px;margin-top:8px;background:none;border:none;font-size:13px;font-weight:600;color:var(--blue);cursor:pointer;font-family:inherit;text-align:center;text-decoration:underline;text-underline-offset:3px}
-.plan-details:hover{color:var(--blue-dark)}
-.plan-feats-collapsed{max-height:0;overflow:hidden;transition:max-height .3s var(--ease);list-style:none;margin:0;padding:0}
-.plan-card.expanded .plan-feats-collapsed{max-height:200px;margin-top:.5rem;padding-top:.5rem;border-top:1px solid var(--border)}
-.plan-feats-collapsed li{font-size:12px;color:var(--muted);padding:4px 0}
-.plans-empty{display:none;text-align:center;padding:3rem 2rem;color:var(--muted);font-size:15px;background:white;border:1px dashed var(--border);border-radius:var(--radius-lg);margin:0 2rem}
+.plan-price-currency{font-size:16px;font-weight:700;margin-top:10px;margin-right:1px;color:var(--blue)}
+.plan-price-int{font-size:54px;font-weight:900;letter-spacing:-3px;color:var(--ink)}
+.plan-price-cents{font-size:22px;font-weight:800;margin-top:8px;color:var(--muted)}
+.plan-price-period{font-size:12px;font-weight:600;color:var(--muted2);align-self:flex-end;margin-bottom:8px;margin-left:2px}
+.plan-price-note{font-size:10.5px;color:var(--muted2);margin-top:6px;line-height:1.45;max-width:230px;margin-left:auto;margin-right:auto}
+
+/* Features */
+.plan-feats{list-style:none;margin:0 auto 1rem;flex:1;width:100%;max-width:220px;text-align:left}
+.plan-feats li{font-size:12.5px;color:var(--ink2);padding:5.5px 0;display:flex;align-items:flex-start;gap:8px;line-height:1.4;border-bottom:1px solid var(--surface)}
+.plan-feats li:last-child{border-bottom:none}
+.plan-feats li::before{content:'';width:17px;height:17px;border-radius:50%;background:var(--blue);flex-shrink:0;margin-top:.5px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3 8l3.5 3.5L13 5' stroke='white' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:center;background-size:10px}
+
+/* CTA */
+.plan-cta{display:block;width:100%;padding:13.5px;border-radius:50px;font-size:14px;font-weight:700;text-align:center;text-decoration:none;cursor:pointer;border:none;background:var(--blue);color:white;transition:background var(--trans),transform var(--trans),box-shadow var(--trans);font-family:inherit;letter-spacing:.2px;box-shadow:0 4px 16px rgba(16,64,193,.2)}
+.plan-cta:hover{background:var(--blue-hover);transform:translateY(-1px);box-shadow:0 8px 24px rgba(16,64,193,.3)}
+.plan-card.featured .plan-cta{background:var(--blue);box-shadow:var(--shadow-blue)}
+
+.plans-empty{display:none;text-align:center;padding:3rem 2rem;color:var(--muted);font-size:15px;background:white;border:1.5px dashed var(--border2);border-radius:var(--radius-lg);margin:0 2rem}
 .plans-empty.show{display:block}
-.stream-tile{display:inline-flex;align-items:center;justify-content:center;background:#fff;border-radius:6px;padding:6px 10px;border:1px solid var(--border)}
-.stream-tile img{height:20px;width:auto;max-width:90px;object-fit:contain}
-.plan-extra-tag{font-size:11px;font-weight:700;color:var(--muted)}
 
-/* ── POR QUÊ ── */
-.why-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
-.why-card{border-radius:var(--radius);padding:1.75rem;display:flex;flex-direction:column;gap:1rem;border:1.5px solid rgba(255,255,255,.08);background:rgba(255,255,255,.04);transition:transform .2s,background .2s}
-.why-card:hover{transform:translateY(-4px);background:rgba(255,255,255,.07)}
-.why-icon-wrap{width:44px;height:44px;border-radius:10px;background:rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;color:#a8c4ff;flex-shrink:0}
-.why-icon-wrap svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
-.why-title{font-size:16px;font-weight:700;color:white}
-.why-desc{font-size:14px;color:rgba(255,255,255,.5);line-height:1.65}
+/* ── PLANS INFO STRIP ── */
+.plans-info-strip{max-width:1240px;margin:2rem auto 0;padding:0 2rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.pinfo-card{display:flex;gap:13px;align-items:flex-start;background:white;border:1.5px solid var(--border);border-radius:var(--radius-lg);padding:1.2rem 1.4rem;transition:border-color var(--trans),transform var(--trans);box-shadow:var(--shadow-sm)}
+.pinfo-card:hover{border-color:var(--blue);transform:translateY(-2px)}
+.pinfo-icon{width:38px;height:38px;border-radius:10px;background:var(--blue-xlight);color:var(--blue);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.pinfo-icon svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+.pinfo-title{font-size:13.5px;font-weight:700;color:var(--ink);margin-bottom:3px}
+.pinfo-desc{font-size:12.5px;color:var(--muted);line-height:1.5}
 
-/* ── COBERTURA ── */
-.cov-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px}
-.cov-card{background:white;border:1.5px solid var(--border);border-radius:var(--radius);padding:1.1rem 1.25rem;display:flex;align-items:center;gap:12px;transition:border-color .15s,box-shadow .15s,transform .15s;cursor:pointer}
-.cov-card:hover{border-color:var(--blue);box-shadow:0 4px 16px rgba(16,64,193,.08);transform:translateY(-2px)}
-.cov-dot{width:10px;height:10px;border-radius:50%;background:var(--wpp);flex-shrink:0;box-shadow:0 0 0 3px rgba(37,211,102,.15);animation:dot-pulse 2s ease infinite}
-@keyframes dot-pulse{0%,100%{box-shadow:0 0 0 3px rgba(37,211,102,.15)}50%{box-shadow:0 0 0 6px rgba(37,211,102,.08)}}
-.cov-name{font-size:14px;font-weight:600;color:var(--ink)}
-.cov-plans{font-size:11px;color:var(--muted);margin-top:1px}
-.cov-note{margin-top:1.5rem;font-size:14px;color:var(--muted);padding:1rem 1.25rem;background:white;border-radius:var(--radius);border:1px solid var(--border)}
-.cov-note a{color:var(--blue);font-weight:600;text-decoration:none}
+/* ── WHY ── */
+#por-que .s-title{color:white}
+#por-que .eyebrow{color:#7eb4ff}
+#por-que .eyebrow::before{background:#7eb4ff}
+#por-que .s-sub{color:rgba(255,255,255,.45)}
+.why-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
+.why-card{border-radius:var(--radius-lg);padding:1.75rem;display:flex;flex-direction:column;gap:1rem;border:1.5px solid rgba(255,255,255,.07);background:rgba(255,255,255,.04);transition:transform var(--trans),background var(--trans),border-color var(--trans)}
+.why-card:hover{transform:translateY(-4px);background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.12)}
+.why-icon{width:46px;height:46px;border-radius:12px;background:rgba(126,180,255,.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#7eb4ff}
+.why-icon svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+.why-title{font-size:16px;font-weight:700;color:white;line-height:1.2}
+.why-desc{font-size:13.5px;color:rgba(255,255,255,.45);line-height:1.7}
+
+/* ── COVERAGE ── */
+.cov-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(188px,1fr));gap:12px;margin-bottom:1.5rem}
+.cov-card{background:white;border:1.5px solid var(--border);border-radius:var(--radius-lg);padding:1.1rem 1.3rem;display:flex;align-items:center;gap:12px;transition:border-color var(--trans),box-shadow var(--trans),transform var(--trans);cursor:pointer;box-shadow:var(--shadow-sm)}
+.cov-card:hover{border-color:var(--blue);box-shadow:0 6px 20px rgba(16,64,193,.1);transform:translateY(-2px)}
+.cov-pulse{width:10px;height:10px;border-radius:50%;background:var(--wpp);flex-shrink:0;box-shadow:0 0 0 3px rgba(34,197,94,.18);animation:pulse 2.5s ease infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 3px rgba(34,197,94,.18)}50%{box-shadow:0 0 0 7px rgba(34,197,94,.06)}}
+.cov-name{font-size:14px;font-weight:700;color:var(--ink);line-height:1.2}
+.cov-plans{font-size:11.5px;color:var(--muted);margin-top:2px}
+.cov-note{font-size:14px;color:var(--muted);padding:1.1rem 1.4rem;background:white;border-radius:var(--radius-lg);border:1.5px solid var(--border);box-shadow:var(--shadow-sm)}
+.cov-note a{color:var(--blue);font-weight:700;text-decoration:none}
 .cov-note a:hover{text-decoration:underline}
 
 /* ── FAQ ── */
-.faq-list{display:flex;flex-direction:column;gap:10px;max-width:720px}
-.faq-item{background:white;border:1.5px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:border-color .15s}
-.faq-item.open{border-color:var(--blue)}
-.faq-q{width:100%;padding:1.15rem 1.5rem;background:none;border:none;text-align:left;font-family:inherit;font-size:15px;font-weight:700;color:var(--ink);cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px}
-.faq-q:hover{background:var(--off)}
-.faq-q::after{content:'+';font-size:20px;font-weight:400;color:var(--blue);flex-shrink:0;transition:transform .2s}
-.faq-item.open .faq-q::after{transform:rotate(45deg)}
-.faq-a{max-height:0;overflow:hidden;transition:max-height .3s var(--ease),padding .3s}
-.faq-item.open .faq-a{max-height:200px;padding:0 1.5rem 1.15rem}
-.faq-a p{font-size:14px;color:var(--muted);line-height:1.65}
+.faq-list{display:flex;flex-direction:column;gap:10px;max-width:740px}
+.faq-item{background:white;border:1.5px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;transition:border-color var(--trans),box-shadow var(--trans);box-shadow:var(--shadow-sm)}
+.faq-item.open{border-color:var(--blue);box-shadow:0 4px 20px rgba(16,64,193,.08)}
+.faq-q{width:100%;padding:1.2rem 1.5rem;background:none;border:none;text-align:left;font-family:inherit;font-size:15px;font-weight:700;color:var(--ink);cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px;transition:background var(--trans)}
+.faq-q:hover{background:var(--surface)}
+.faq-chevron{width:22px;height:22px;border-radius:50%;background:var(--surface);color:var(--blue);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:transform .25s var(--ease),background var(--trans)}
+.faq-chevron svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.faq-item.open .faq-chevron{transform:rotate(180deg);background:var(--blue-xlight)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .32s var(--ease),padding .32s}
+.faq-item.open .faq-a{max-height:220px;padding:0 1.5rem 1.3rem}
+.faq-a p{font-size:14px;color:var(--muted);line-height:1.7}
 
-/* ── CONTATO ── */
-.contact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-bottom:2rem}
-.contact-card{background:white;border:1.5px solid var(--border);border-radius:var(--radius);padding:1.5rem;display:flex;gap:14px;align-items:flex-start;transition:border-color .15s,box-shadow .15s}
-.contact-card:hover{border-color:var(--blue);box-shadow:0 4px 16px rgba(16,64,193,.06)}
-.contact-icon{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden}
+/* ── CONTACT ── */
+.contact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(236px,1fr));gap:16px;margin-bottom:2rem}
+.contact-card{background:white;border:1.5px solid var(--border);border-radius:var(--radius-lg);padding:1.4rem;display:flex;gap:14px;align-items:flex-start;transition:border-color var(--trans),box-shadow var(--trans),transform var(--trans);box-shadow:var(--shadow-sm)}
+.contact-card:hover{border-color:var(--blue);box-shadow:0 8px 28px rgba(16,64,193,.08);transform:translateY(-2px)}
+.contact-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .contact-icon svg{width:22px;height:22px;display:block}
-.ci-wpp{background:#e6faf0;color:#128c7e}
-.ci-wpp svg{fill:currentColor}
-.ci-loc{background:#e8eeff;color:var(--blue)}
-.ci-loc svg{stroke:currentColor;fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
-.ci-ig{background:#fde8f0;color:#c13584}
-.ci-ig svg{stroke:currentColor;fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
-.ci-fb{background:#e8eeff;color:#1877f2}
-.ci-fb svg{fill:currentColor}
-.ct-label{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;margin-bottom:3px}
-.ct-val{font-size:15px;font-weight:700;color:var(--ink)}
-.ct-val a{color:var(--ink);text-decoration:none}
+.ci-wpp{background:#dcfce7}
+.ci-wpp svg{fill:#16a34a}
+.ci-loc{background:var(--blue-xlight)}
+.ci-loc svg{stroke:var(--blue);fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+.ci-ig{background:#fce7f3}
+.ci-ig svg{stroke:#be185d;fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+.ci-fb{background:#dbeafe}
+.ci-fb svg{fill:#1d4ed8}
+.ct-label{font-size:10.5px;font-weight:700;color:var(--muted2);text-transform:uppercase;letter-spacing:.7px;margin-bottom:4px}
+.ct-val{font-size:15px;font-weight:700;color:var(--ink);line-height:1.3}
+.ct-val a{color:var(--ink);text-decoration:none;transition:color var(--trans)}
 .ct-val a:hover{color:var(--blue)}
-.copy-hint{font-size:11px;color:var(--muted);margin-top:4px;cursor:pointer}
+.copy-hint{font-size:11.5px;color:var(--muted2);margin-top:5px;cursor:pointer;transition:color var(--trans);display:inline-flex;align-items:center;gap:4px}
 .copy-hint:hover{color:var(--blue)}
 
 /* ── FOOTER ── */
-footer{background:var(--ink);border-top:1px solid rgba(255,255,255,.06);padding:2.5rem;text-align:center}
-.footer-social{display:flex;gap:20px;justify-content:center;margin-bottom:1.25rem;flex-wrap:wrap}
-.footer-social a{color:rgba(255,255,255,.4);text-decoration:none;font-size:13px;font-weight:500;display:flex;align-items:center;gap:6px;transition:color .15s}
-.footer-social a:hover{color:rgba(255,255,255,.9)}
-.footer-copy{font-size:12px;color:rgba(255,255,255,.25);margin-top:.75rem}
+footer{background:var(--ink);border-top:1px solid rgba(255,255,255,.06);padding:3rem 2rem 2rem}
+.footer-inner{max-width:1240px;margin:0 auto}
+.footer-top{display:flex;align-items:flex-start;justify-content:space-between;gap:3rem;margin-bottom:2.5rem;flex-wrap:wrap}
+.footer-brand{display:flex;flex-direction:column;gap:12px;max-width:280px}
+.footer-brand img{height:34px;width:auto;opacity:.9}
+.footer-brand p{font-size:13px;color:rgba(255,255,255,.38);line-height:1.65}
+.footer-links{display:flex;gap:3rem;flex-wrap:wrap}
+.footer-links-group{display:flex;flex-direction:column;gap:10px}
+.footer-links-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:rgba(255,255,255,.35);margin-bottom:4px}
+.footer-links-group a{color:rgba(255,255,255,.5);text-decoration:none;font-size:13.5px;font-weight:500;transition:color var(--trans)}
+.footer-links-group a:hover{color:rgba(255,255,255,.9)}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.07);padding-top:1.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.75rem}
+.footer-copy{font-size:12px;color:rgba(255,255,255,.22)}
+.footer-social{display:flex;gap:14px}
+.footer-social a{color:rgba(255,255,255,.35);text-decoration:none;font-size:12.5px;font-weight:600;transition:color var(--trans)}
+.footer-social a:hover{color:rgba(255,255,255,.8)}
 
-/* ── FLOAT WPP + BACK TOP ── */
-.float-actions{position:fixed;bottom:24px;right:24px;display:flex;flex-direction:column;gap:12px;z-index:999}
-.float-wpp{background:var(--wpp);color:white;width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0;text-decoration:none;box-shadow:0 4px 24px rgba(37,211,102,.45);transition:transform .15s,box-shadow .15s;position:relative}
-.float-wpp::before{content:'';position:absolute;inset:-4px;border-radius:50%;border:2px solid var(--wpp);opacity:0;animation:wpp-ring 2s ease infinite}
-@keyframes wpp-ring{0%{transform:scale(1);opacity:.6}100%{transform:scale(1.3);opacity:0}}
-.float-wpp:hover{transform:scale(1.08);box-shadow:0 8px 32px rgba(37,211,102,.5)}
-.back-top{width:44px;height:44px;border-radius:50%;background:var(--ink);color:white;border:none;font-size:18px;cursor:pointer;opacity:0;visibility:hidden;transition:opacity .2s,visibility .2s,transform .15s;box-shadow:0 4px 16px rgba(0,0,0,.2);align-self:flex-end}
+/* ── FLOAT BUTTONS ── */
+.float-actions{position:fixed;bottom:24px;right:24px;display:flex;flex-direction:column;gap:10px;z-index:998;align-items:flex-end}
+.float-wpp{background:var(--wpp);color:white;width:58px;height:58px;border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;box-shadow:0 6px 28px rgba(34,197,94,.45);transition:transform var(--trans),box-shadow var(--trans);position:relative}
+.float-wpp::after{content:'';position:absolute;inset:-5px;border-radius:50%;border:2px solid var(--wpp);opacity:0;animation:wpp-ring 2.4s ease infinite}
+@keyframes wpp-ring{0%{transform:scale(.9);opacity:.7}100%{transform:scale(1.4);opacity:0}}
+.float-wpp:hover{transform:scale(1.08);box-shadow:0 10px 36px rgba(34,197,94,.55)}
+.back-top{width:42px;height:42px;border-radius:50%;background:rgba(13,21,38,.85);backdrop-filter:blur(8px);color:white;border:1px solid rgba(255,255,255,.12);font-size:16px;cursor:pointer;opacity:0;visibility:hidden;transition:opacity var(--trans),visibility var(--trans),transform var(--trans);box-shadow:var(--shadow);display:flex;align-items:center;justify-content:center}
 .back-top.show{opacity:1;visibility:visible}
 .back-top:hover{transform:translateY(-2px)}
 
-/* ── LOADING / ERROR / TOAST ── */
-.skeleton{flex:0 0 280px;scroll-snap-align:start;height:420px;background:linear-gradient(90deg,var(--off) 25%,var(--border) 50%,var(--off) 75%);background-size:200%;animation:skel 1.4s linear infinite;border-radius:var(--radius-lg)}
+/* ── STATES ── */
+.skeleton{flex:0 0 276px;scroll-snap-align:start;height:440px;background:linear-gradient(90deg,var(--surface) 25%,var(--border) 50%,var(--surface) 75%);background-size:200%;animation:skel 1.5s linear infinite;border-radius:var(--radius-xl)}
 @keyframes skel{0%{background-position:200% 0}100%{background-position:-200% 0}}
-.err-box{background:#fff0f0;border:1.5px solid #fca5a5;border-radius:12px;padding:1.5rem;text-align:center;color:#7f1d1d;font-size:14px;flex:1;min-width:280px}
-.err-box strong{display:block;margin-bottom:4px;font-size:16px}
-.toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--ink);color:white;padding:12px 24px;border-radius:10px;font-size:13px;font-weight:600;opacity:0;visibility:hidden;transition:all .3s var(--ease);z-index:1000;box-shadow:0 8px 32px rgba(0,0,0,.2)}
+.toast{position:fixed;bottom:96px;left:50%;transform:translateX(-50%) translateY(12px);background:var(--ink);color:white;padding:11px 22px;border-radius:50px;font-size:13px;font-weight:600;opacity:0;visibility:hidden;transition:all .28s var(--ease);z-index:1000;box-shadow:var(--shadow-lg)}
 .toast.show{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0)}
 
-/* ── PLANS INFO ROW ── */
-.plans-info-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:2rem;padding:0 2rem;max-width:1200px;margin-left:auto;margin-right:auto}
-.plans-info-item{display:flex;gap:14px;align-items:flex-start;background:white;border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem 1.5rem;transition:border-color .15s,transform .15s}
-.plans-info-item:hover{border-color:var(--blue);transform:translateY(-2px)}
-.plans-info-icon{width:40px;height:40px;border-radius:10px;background:rgba(16,64,193,.1);color:var(--blue);display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.plans-info-icon svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
-.plans-info-title{font-size:14px;font-weight:700;color:var(--ink);margin-bottom:3px}
-.plans-info-desc{font-size:13px;color:var(--muted);line-height:1.5}
-
 /* ── RESPONSIVE ── */
+@media(max-width:900px){
+  .perks-inner{grid-template-columns:repeat(2,1fr)}
+  .perk:nth-child(2){border-right:none}
+  .perk:nth-child(1),.perk:nth-child(2){border-bottom:1px solid var(--border)}
+  .footer-top{flex-direction:column;gap:2rem}
+  .footer-links{gap:2rem}
+}
 @media(max-width:760px){
-  nav{padding:0 1.25rem}
+  nav{padding:0 1.25rem;height:60px}
+  .mobile-menu{top:60px}
   .nav-links{display:none}
-  .nav-toggle{display:block}
-  .hero-banner{min-height:260px}
-  .hero-banner-content{padding:2rem 1.25rem}
-  .hero-banner-img{object-position:70% center}
-  .top-central{padding:8px 1.25rem}
-  .top-central-text{font-size:12px}
-  section{padding:3rem 1.25rem}
+  .nav-toggle{display:flex;align-items:center;justify-content:center}
+  .hero{min-height:380px}
+  .hero-inner{padding:2.5rem 1.25rem}
+  .hero h1{letter-spacing:-1px}
+  section{padding:3.5rem 1.25rem}
   #planos .section-inner{padding:0 1.25rem}
   .plans-carousel-wrap{padding:0 1.25rem}
-  .perks-inner{grid-template-columns:repeat(2,1fr)}
-  .perk-item:nth-child(2){border-right:none}
-  .perk-item:nth-child(1),.perk-item:nth-child(2){border-bottom:1px solid var(--border)}
-  .plan-card{flex:0 0 260px}
+  .plan-card{flex:0 0 256px}
+  .plans-info-strip{padding:0 1.25rem}
+  .hero-stats{gap:18px}
+  .top-bar{padding:8px 1.25rem}
+  .footer-bottom{flex-direction:column;text-align:center}
+}
+@media(max-width:440px){
+  .perks-inner{grid-template-columns:1fr}
+  .perk{border-right:none;border-bottom:1px solid var(--border)}
+  .perk:last-child{border-bottom:none}
 }
 </style>
 </head>
@@ -275,160 +326,193 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,.06);padding:
 
 <a href="#planos" class="skip-link">Ir para planos</a>
 
-<!-- TOP CENTRAL BAR -->
-<div class="top-central">
-  <div class="top-central-inner">
-    <span class="top-central-text"><strong>Já é cliente?</strong> Acesse boletos, faturas e suporte</span>
-    <a href="https://worknet.sgp.net.br/accounts/central/login" class="top-central-btn" target="_blank" rel="noopener">Central do Assinante →</a>
+<!-- TOP BAR -->
+<div class="top-bar">
+  <div class="top-bar-inner">
+    <span class="top-bar-text"><strong>Já é cliente?</strong> Acesse boletos, faturas e suporte online</span>
+    <a href="https://worknet.sgp.net.br/accounts/central/login" class="top-bar-link" target="_blank" rel="noopener">Central do Assinante →</a>
   </div>
 </div>
 
 <!-- NAV -->
-<nav>
-  <a href="#" class="nav-brand">
-    <img src="https://static.wixstatic.com/media/6baf7f_efd3c7b6dff74868a512df7ad14be321~mv2.png" alt="Worknet Telecom">
+<nav aria-label="Navegação principal">
+  <a href="#" class="nav-brand" aria-label="Worknet Telecom — início">
+    <img src="https://static.wixstatic.com/media/6baf7f_efd3c7b6dff74868a512df7ad14be321~mv2.png" alt="Logo Worknet Telecom" width="120" height="36">
     <div class="nav-brand-text">WORKNET TELECOM<em>Brazlândia · DF</em></div>
   </a>
   <div class="nav-right">
-    <div class="nav-links">
+    <nav class="nav-links" aria-label="Links principais">
       <a href="#planos">Planos</a>
       <a href="#cobertura">Cobertura</a>
       <a href="#faq">Dúvidas</a>
       <a href="#por-que">Por que nós</a>
       <a href="#contato">Contato</a>
-      <a id="nav-wpp" href="#" class="nav-wpp" target="_blank" rel="noopener">Assine</a>
-    </div>
-    <button class="nav-toggle" id="nav-toggle" aria-label="Abrir menu" aria-expanded="false">☰</button>
+      <a id="nav-wpp" href="#" class="nav-cta" target="_blank" rel="noopener">Assinar agora</a>
+    </nav>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobile-menu">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
   </div>
 </nav>
-<div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+
+<div class="mobile-menu" id="mobile-menu" role="navigation" aria-label="Menu mobile" aria-hidden="true">
   <a href="#planos" onclick="fecharMenu()">Planos</a>
   <a href="#cobertura" onclick="fecharMenu()">Cobertura</a>
   <a href="#faq" onclick="fecharMenu()">Dúvidas</a>
   <a href="#por-que" onclick="fecharMenu()">Por que nós</a>
   <a href="#contato" onclick="fecharMenu()">Contato</a>
-  <a id="mobile-wpp" href="#" class="nav-wpp" target="_blank" rel="noopener">Assine pelo WhatsApp</a>
+  <a id="mobile-wpp" href="#" class="nav-cta" target="_blank" rel="noopener" onclick="fecharMenu()">Assinar pelo WhatsApp</a>
 </div>
 
-<!-- HERO BANNER -->
-<header class="hero-banner">
-  <img class="hero-banner-img" src="assets/images/hero-banner.jpg" alt="" loading="eager" fetchpriority="high" decoding="async" width="2400" height="1350">
-  <div class="hero-banner-overlay" aria-hidden="true"></div>
-  <div class="hero-banner-content">
-    <span class="hero-badge">100% Fibra Ótica</span>
-    <h1>Internet fibra em <span id="hero-city">Brazlândia</span></h1>
-    <p class="hero-banner-desc" id="hero-desc">Conexão estável, rápida e atendimento local. Somos daqui — e quem está pertinho cuida melhor de você.</p>
+<!-- HERO -->
+<header class="hero" role="banner">
+  <img class="hero-bg" src="assets/images/hero-banner.jpg" alt="" loading="eager" fetchpriority="high" decoding="async" onerror="this.style.display='none'">
+  <canvas id="hero-canvas" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:.55"></canvas>
+  <div class="hero-gradient" aria-hidden="true"></div>
+  <div class="hero-inner">
+    <div class="hero-badge">100% Fibra Ótica</div>
+    <h1>Internet fibra em <em id="hero-city">Brazlândia</em></h1>
+    <p class="hero-sub" id="hero-desc">Conexão estável, rápida e atendimento local. Somos daqui — e quem está pertinho cuida melhor de você.</p>
     <div class="hero-actions">
-      <a href="#planos" class="btn-primary">Ver planos</a>
-      <a id="hero-wpp" href="#" class="btn-outline" target="_blank" rel="noopener">Falar no WhatsApp</a>
+      <a href="#planos" class="btn-hero btn-hero-primary">Ver planos</a>
+      <a id="hero-wpp" href="#" class="btn-hero btn-hero-outline" target="_blank" rel="noopener">Falar no WhatsApp</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><strong>100%</strong><span>Fibra ótica</span></div>
+      <div class="hero-stat"><strong id="stat-preco">R$60</strong><span>A partir de</span></div>
+      <div class="hero-stat"><strong id="stat-cidades">9</strong><span>Localidades</span></div>
+      <div class="hero-stat"><strong>R$0</strong><span>Instalação</span></div>
     </div>
   </div>
 </header>
 
-<!-- PERKS STRIP -->
-<div class="perks-strip">
+<!-- PERKS -->
+<div class="perks" role="list" aria-label="Diferenciais">
   <div class="perks-inner">
-    <div class="perk-item"><strong>100% Fibra Ótica</strong><span>Cabo de fibra direto na sua casa</span></div>
-    <div class="perk-item"><strong>Adesão gratuita</strong><span>Sem taxa de instalação</span></div>
-    <div class="perk-item"><strong>A partir de <span id="stat-preco">R$60</span></strong><span>Planos com valor fixo</span></div>
-    <div class="perk-item"><strong><span id="stat-cidades">8+</span> localidades</strong><span>Brazlândia e região</span></div>
+    <div class="perk" role="listitem">
+      <div class="perk-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3c-1.2 5.4-4 7.4-7 9 3.4 2 6.4 4.3 7 12 .6-7.7 3.6-10 7-12-3-1.6-5.8-3.6-7-9z"/></svg></div>
+      <div class="perk-text"><strong>100% Fibra Ótica</strong><span>Cabo direto na sua casa</span></div>
+    </div>
+    <div class="perk" role="listitem">
+      <div class="perk-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div>
+      <div class="perk-text"><strong>Instalação rápida</strong><span>Em até 24 horas</span></div>
+    </div>
+    <div class="perk" role="listitem">
+      <div class="perk-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+      <div class="perk-text"><strong>Adesão gratuita</strong><span>Sem taxa de instalação</span></div>
+    </div>
+    <div class="perk" role="listitem">
+      <div class="perk-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+      <div class="perk-text"><strong>Atendimento local</strong><span>Equipe em Brazlândia</span></div>
+    </div>
   </div>
 </div>
 
 <!-- PLANOS -->
-<section id="planos">
+<section id="planos" aria-labelledby="planos-title">
   <div class="section-inner reveal">
-    <div class="plans-toolbar">
-      <div class="loc-selector-wrap">
-        <span class="loc-label">Sua localidade</span>
-        <div class="loc-pills" id="loc-pills"></div>
-      </div>
+    <div class="plans-header">
+      <span class="eyebrow">Planos</span>
+      <h2 class="s-title" id="planos-title">Escolha seu plano</h2>
+      <p class="s-sub">Selecione sua localidade e veja os planos disponíveis para você.</p>
+      <span class="loc-label">Sua localidade</span>
+      <div class="loc-pills" id="loc-pills" role="group" aria-label="Selecionar localidade"></div>
     </div>
-
-    <p class="plans-count" id="plans-count"></p>
-
+    <p class="plans-count" id="plans-count" aria-live="polite"></p>
     <div class="plans-carousel-wrap">
-      <div class="plans-carousel" id="plans-grid">
-        <div class="skeleton"></div>
-        <div class="skeleton"></div>
-        <div class="skeleton"></div>
+      <div class="plans-carousel" id="plans-grid" role="list" aria-label="Planos disponíveis">
+        <div class="skeleton" aria-hidden="true"></div>
+        <div class="skeleton" aria-hidden="true"></div>
+        <div class="skeleton" aria-hidden="true"></div>
       </div>
     </div>
-    <div class="plans-empty" id="plans-empty">Nenhum plano disponível para essa localidade ainda. <a id="plans-empty-wpp" href="#" target="_blank" rel="noopener" style="color:var(--blue);font-weight:700">Fale com a gente</a>.</div>
+    <div class="plans-empty" id="plans-empty" role="status">
+      Nenhum plano disponível para essa localidade ainda.
+      <a id="plans-empty-wpp" href="#" target="_blank" rel="noopener" style="color:var(--blue);font-weight:700;text-decoration:none"> Fale com a gente →</a>
+    </div>
   </div>
-
-  <div class="plans-info-row">
-    <div class="plans-info-item"><div class="plans-info-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13"/><path d="M19 8c0 .5-1.5 2-7 2S5 8.5 5 8s1.5-3 7-3 7 2.5 7 3"/><path d="M12 5c-1.5-2-3-2-4.5-1S7 5 7 5"/><path d="M12 5c1.5-2 3-2 4.5-1S17 5 17 5"/></svg></div><div><div class="plans-info-title">Adesão gratuita</div><div class="plans-info-desc">Sem taxa de instalação para novos clientes.</div></div></div>
-    <div class="plans-info-item"><div class="plans-info-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 7h6"/><path d="M9 11h6"/><path d="M9 15h4"/><circle cx="17" cy="17" r="4"/><path d="m19.5 19.5 1.5 1.5"/></svg></div><div><div class="plans-info-title">Consulta SPC/SERASA</div><div class="plans-info-desc">Realizamos análise de crédito no cadastro.</div></div></div>
-    <div class="plans-info-item"><div class="plans-info-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="7" rx="2"/><path d="M7 11V9a5 5 0 0 1 10 0v2"/><circle cx="8" cy="15" r="1" fill="currentColor" stroke="none"/><circle cx="12" cy="15" r="1" fill="currentColor" stroke="none"/><circle cx="16" cy="15" r="1" fill="currentColor" stroke="none"/><path d="M6 18h12"/></svg></div><div><div class="plans-info-title">Equipamento em comodato</div><div class="plans-info-desc">Se queimar por defeito, trocamos sem custo adicional.</div></div></div>
-    <div class="plans-info-item"><div class="plans-info-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4"/><path d="M8 3v4"/><path d="M3 11h18"/><path d="M8 15h2"/><path d="M12 15h2"/></svg></div><div><div class="plans-info-title">12 meses de fidelidade</div><div class="plans-info-desc">Todos os planos possuem 1 ano de fidelidade.</div></div></div>
+  <div class="plans-info-strip">
+    <div class="pinfo-card"><div class="pinfo-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13"/><path d="M19 8c0 .5-1.5 2-7 2S5 8.5 5 8s1.5-3 7-3 7 2.5 7 3"/></svg></div><div><div class="pinfo-title">Adesão gratuita</div><div class="pinfo-desc">Sem taxa de instalação para novos clientes.</div></div></div>
+    <div class="pinfo-card"><div class="pinfo-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4"/><path d="M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9c1.51 0 2.93.37 4.18 1.03"/><path d="M21 3l-9 9"/></svg></div><div><div class="pinfo-title">Consulta SPC/SERASA</div><div class="pinfo-desc">Realizamos análise de crédito no cadastro.</div></div></div>
+    <div class="pinfo-card"><div class="pinfo-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="7" rx="2"/><path d="M7 11V9a5 5 0 0 1 10 0v2"/></svg></div><div><div class="pinfo-title">Equipamento em comodato</div><div class="pinfo-desc">Se queimar por defeito, trocamos sem custo.</div></div></div>
+    <div class="pinfo-card"><div class="pinfo-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 11h18M8 15h2M12 15h2"/></svg></div><div><div class="pinfo-title">12 meses de fidelidade</div><div class="pinfo-desc">Todos os planos com 1 ano de fidelidade.</div></div></div>
   </div>
 </section>
 
 <!-- POR QUÊ -->
-<section id="por-que" class="bg-ink">
+<section id="por-que" class="bg-dark" aria-labelledby="porque-title">
   <div class="section-inner reveal">
-    <span class="eyebrow" style="color:#a8c4ff">Por que nos escolher</span>
-    <h2 class="s-title" style="color:white">Somos seus vizinhos</h2>
-    <p class="s-sub" style="color:rgba(255,255,255,0.45);margin-bottom:2.5rem">Nascemos em Brazlândia. A gente sabe o que a região precisa.</p>
+    <span class="eyebrow">Por que nos escolher</span>
+    <h2 class="s-title" id="porque-title">Somos seus vizinhos</h2>
+    <p class="s-sub">Nascemos em Brazlândia. A gente sabe o que a região precisa.</p>
     <div class="why-grid">
-      <div class="why-card"><div class="why-icon-wrap" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 21s-6-4.5-6-10a6 6 0 0 1 12 0c0 5.5-6 10-6 10"/><circle cx="12" cy="11" r="2"/></svg></div><div class="why-title">Provedor local</div><div class="why-desc">Nossa sede é em Brazlândia. Atendimento rápido porque estamos do seu lado.</div></div>
-      <div class="why-card"><div class="why-icon-wrap" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 12h16"/><path d="M4 12l3-3"/><path d="M4 12l3 3"/><path d="M20 12l-3-3"/><path d="M20 12l-3 3"/><circle cx="12" cy="12" r="2"/></svg></div><div class="why-title">Fibra até você</div><div class="why-desc">Cabo de fibra ótica direto na sua casa. Mais velocidade, menos quedas.</div></div>
-      <div class="why-card"><div class="why-icon-wrap" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3v18"/><path d="M7 8h10"/><path d="M7 12h7"/><path d="M7 16h4"/><circle cx="17" cy="17" r="4"/><path d="M15.5 17h3"/><path d="M17 15.5v3"/></svg></div><div class="why-title">Preço transparente</div><div class="why-desc">O valor que você contratou é o que você paga. Sem cobranças escondidas.</div></div>
-      <div class="why-card"><div class="why-icon-wrap" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 11h4v4H6z"/><path d="M8 9v6"/><path d="M16 11.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"/><path d="M18.5 10a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"/><path d="M2 12a8 8 0 0 1 8-8h4a8 8 0 0 1 8 8 8 8 0 0 1-8 8h-4a8 8 0 0 1-8-8z"/></svg></div><div class="why-title">Games & home office</div><div class="why-desc">Baixa latência e upload estável para trabalhar, jogar e assistir sem travar.</div></div>
+      <div class="why-card">
+        <div class="why-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 21s-6-4.5-6-10a6 6 0 0 1 12 0c0 5.5-6 10-6 10"/><circle cx="12" cy="11" r="2"/></svg></div>
+        <div><div class="why-title">Provedor local</div><div class="why-desc">Nossa sede é em Brazlândia. Atendimento rápido porque estamos do seu lado.</div></div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 12h16M4 12l3-3M4 12l3 3M20 12l-3-3M20 12l-3 3"/><circle cx="12" cy="12" r="2"/></svg></div>
+        <div><div class="why-title">Fibra até você</div><div class="why-desc">Cabo de fibra ótica direto na sua casa. Mais velocidade, menos quedas.</div></div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3v18M7 8h10M7 12h7M7 16h4"/></svg></div>
+        <div><div class="why-title">Preço transparente</div><div class="why-desc">O valor que você contratou é o que você paga. Sem cobranças escondidas.</div></div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg></div>
+        <div><div class="why-title">Games & home office</div><div class="why-desc">Baixa latência e upload estável para trabalhar, jogar e assistir sem travar.</div></div>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- COBERTURA -->
-<section id="cobertura" class="bg-off">
+<section id="cobertura" class="bg-surface" aria-labelledby="cobertura-title">
   <div class="section-inner reveal">
     <span class="eyebrow">Cobertura</span>
-    <h2 class="s-title">Onde estamos presentes</h2>
-    <p class="s-sub">Atendemos Brazlândia e região. Clique em uma localidade para ver os planos disponíveis.</p>
-    <div class="cov-grid" id="cov-grid">
-      <div class="skeleton"></div>
-    </div>
-    <p class="cov-note">Não encontrou sua cidade? <a id="cov-wpp" href="#" target="_blank" rel="noopener">Fale com a gente</a> — estamos expandindo!</p>
+    <h2 class="s-title" id="cobertura-title">Onde estamos presentes</h2>
+    <p class="s-sub">Atendemos Brazlândia e região. Clique para ver os planos da localidade.</p>
+    <div class="cov-grid" id="cov-grid" role="list"><div class="skeleton" style="height:76px" aria-hidden="true"></div></div>
+    <p class="cov-note">Não encontrou sua cidade? <a id="cov-wpp" href="#" target="_blank" rel="noopener">Fale conosco pelo WhatsApp</a> — estamos sempre expandindo!</p>
   </div>
 </section>
 
 <!-- FAQ -->
-<section id="faq">
+<section id="faq" aria-labelledby="faq-title">
   <div class="section-inner reveal">
     <span class="eyebrow">Dúvidas frequentes</span>
-    <h2 class="s-title">Perguntas comuns</h2>
+    <h2 class="s-title" id="faq-title">Perguntas comuns</h2>
     <p class="s-sub">Respostas rápidas sobre instalação, fidelidade e atendimento.</p>
-    <div class="faq-list">
-      <div class="faq-item">
-        <button class="faq-q" type="button">Quanto tempo demora a instalação?</button>
-        <div class="faq-a"><p>Na maioria dos casos, a instalação é feita em até 24 horas — muitas vezes no mesmo dia. Cadastros feitos aos domingos, feriados ou muito tarde podem ser agendados para o próximo dia útil.</p></div>
+    <div class="faq-list" role="list">
+      <div class="faq-item" role="listitem">
+        <button class="faq-q" type="button" aria-expanded="false">Quanto tempo demora a instalação?<span class="faq-chevron" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></span></button>
+        <div class="faq-a" role="region"><p>Na maioria dos casos, a instalação é feita em até 24 horas — muitas vezes no mesmo dia. Cadastros feitos aos domingos, feriados ou muito tarde podem ser agendados para o próximo dia útil.</p></div>
       </div>
-      <div class="faq-item">
-        <button class="faq-q" type="button">Tem taxa de instalação?</button>
-        <div class="faq-a"><p>Não! A adesão é gratuita para novos clientes. O roteador fica em comodato enquanto você for assinante.</p></div>
+      <div class="faq-item" role="listitem">
+        <button class="faq-q" type="button" aria-expanded="false">Tem taxa de instalação?<span class="faq-chevron" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></span></button>
+        <div class="faq-a" role="region"><p>Não! A adesão é gratuita para novos clientes. O roteador fica em comodato enquanto você for assinante.</p></div>
       </div>
-      <div class="faq-item">
-        <button class="faq-q" type="button">O que é fidelidade de 12 meses?</button>
-        <div class="faq-a"><p>É o período mínimo de contrato. Durante esse tempo, você mantém o valor promocional do plano contratado.</p></div>
+      <div class="faq-item" role="listitem">
+        <button class="faq-q" type="button" aria-expanded="false">O que é fidelidade de 12 meses?<span class="faq-chevron" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></span></button>
+        <div class="faq-a" role="region"><p>É o período mínimo de contrato. Durante esse tempo, você mantém o valor promocional do plano contratado.</p></div>
       </div>
-      <div class="faq-item">
-        <button class="faq-q" type="button">Como funciona o desconto de pontualidade?</button>
-        <div class="faq-a"><p>Pagando até a data de vencimento, você paga o valor com desconto indicado no plano. Após o vencimento, aplica-se o valor cheio.</p></div>
+      <div class="faq-item" role="listitem">
+        <button class="faq-q" type="button" aria-expanded="false">Como funciona o desconto de pontualidade?<span class="faq-chevron" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></span></button>
+        <div class="faq-a" role="region"><p>Pagando até a data de vencimento, você paga o valor com desconto indicado no plano. Após o vencimento, aplica-se o valor cheio.</p></div>
       </div>
-      <div class="faq-item">
-        <button class="faq-q" type="button">Atendem minha região?</button>
-        <div class="faq-a"><p>Confira a lista de localidades na seção Cobertura acima. Se sua cidade não aparecer, fale conosco pelo WhatsApp — estamos em expansão!</p></div>
+      <div class="faq-item" role="listitem">
+        <button class="faq-q" type="button" aria-expanded="false">Atendem minha região?<span class="faq-chevron" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></span></button>
+        <div class="faq-a" role="region"><p>Confira a lista de localidades na seção Cobertura acima. Se sua cidade não aparecer, fale conosco pelo WhatsApp — estamos em expansão!</p></div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- CONTATO -->
-<section id="contato">
+<section id="contato" class="bg-surface" aria-labelledby="contato-title">
   <div class="section-inner reveal">
     <span class="eyebrow">Contato</span>
-    <h2 class="s-title">Fale com a Worknet</h2>
+    <h2 class="s-title" id="contato-title">Fale com a Worknet</h2>
     <p class="s-sub">Atendimento ágil e local. Estamos aqui para ajudar.</p>
     <div class="contact-grid">
       <div class="contact-card">
@@ -436,43 +520,83 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,.06);padding:
         <div>
           <div class="ct-label">WhatsApp</div>
           <div class="ct-val"><a id="c-wpp" href="#" target="_blank" rel="noopener">—</a></div>
-          <div class="copy-hint" id="copy-wpp" onclick="copiarTelefone()">Clique para copiar número</div>
+          <div class="copy-hint" id="copy-wpp" role="button" tabindex="0" onclick="copiarTelefone()" onkeydown="if(event.key==='Enter')copiarTelefone()">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            Clique para copiar
+          </div>
         </div>
       </div>
-      <div class="contact-card"><div class="contact-icon ci-loc" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 21s-6-4.5-6-10a6 6 0 0 1 12 0c0 5.5-6 10-6 10"/><circle cx="12" cy="11" r="2"/></svg></div><div><div class="ct-label">Endereço</div><div class="ct-val" id="c-end">—</div></div></div>
-      <div class="contact-card"><div class="contact-icon ci-ig" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></div><div><div class="ct-label">Instagram</div><div class="ct-val"><a id="c-ig" href="#" target="_blank" rel="noopener">—</a></div></div></div>
-      <div class="contact-card"><div class="contact-icon ci-fb" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></div><div><div class="ct-label">Facebook</div><div class="ct-val"><a id="c-fb" href="#" target="_blank" rel="noopener">Worknet Telecom</a></div></div></div>
+      <div class="contact-card">
+        <div class="contact-icon ci-loc" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 21s-6-4.5-6-10a6 6 0 0 1 12 0c0 5.5-6 10-6 10"/><circle cx="12" cy="11" r="2"/></svg></div>
+        <div><div class="ct-label">Endereço</div><div class="ct-val" id="c-end">—</div></div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-icon ci-ig" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></div>
+        <div><div class="ct-label">Instagram</div><div class="ct-val"><a id="c-ig" href="#" target="_blank" rel="noopener">—</a></div></div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-icon ci-fb" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></div>
+        <div><div class="ct-label">Facebook</div><div class="ct-val"><a id="c-fb" href="#" target="_blank" rel="noopener">Worknet Telecom</a></div></div>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-social">
-    <a id="f-ig" href="#" target="_blank" rel="noopener">Instagram</a>
-    <a id="f-fb" href="#" target="_blank" rel="noopener">Facebook</a>
-    <a id="f-wpp" href="#" target="_blank" rel="noopener">WhatsApp</a>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-links">
+        <div class="footer-links-group">
+          <span class="footer-links-title">Navegação</span>
+          <a href="#planos">Planos</a>
+          <a href="#cobertura">Cobertura</a>
+          <a href="#faq">Dúvidas</a>
+          <a href="#por-que">Por que nós</a>
+        </div>
+        <div class="footer-links-group">
+          <span class="footer-links-title">Contato</span>
+          <a href="#contato">Fale conosco</a>
+          <a id="f-wpp" href="#" target="_blank" rel="noopener">WhatsApp</a>
+          <a id="f-ig" href="#" target="_blank" rel="noopener">Instagram</a>
+          <a id="f-fb" href="#" target="_blank" rel="noopener">Facebook</a>
+        </div>
+        <div class="footer-links-group">
+          <span class="footer-links-title">Cliente</span>
+          <a href="https://worknet.sgp.net.br/accounts/central/login" target="_blank" rel="noopener">Central do Assinante</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2026 Worknet Telecom · Brazlândia, DF · Todos os direitos reservados.</p>
+      <div class="footer-social">
+        <a id="f-ig2" href="#" target="_blank" rel="noopener">Instagram</a>
+        <a id="f-fb2" href="#" target="_blank" rel="noopener">Facebook</a>
+        <a id="f-wpp2" href="#" target="_blank" rel="noopener">WhatsApp</a>
+      </div>
+    </div>
   </div>
-  <p style="color:rgba(255,255,255,0.5);font-size:14px;font-weight:600">Worknet Telecom · Brazlândia, Distrito Federal</p>
-  <p id="f-end" style="color:rgba(255,255,255,0.3);font-size:13px;margin-top:4px"></p>
-  <p class="footer-copy">© 2026 Worknet Telecom. Todos os direitos reservados.</p>
 </footer>
 
+<!-- FLOAT ACTIONS -->
 <div class="float-actions">
-  <button class="back-top" id="back-top" aria-label="Voltar ao topo" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
-  <a id="float-wpp" href="#" class="float-wpp" target="_blank" rel="noopener" title="WhatsApp">
-    <svg width="28" height="28" viewBox="0 0 24 24" fill="white" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  <button class="back-top" id="back-top" aria-label="Voltar ao topo" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg>
+  </button>
+  <a id="float-wpp" href="#" class="float-wpp" target="_blank" rel="noopener" title="Falar pelo WhatsApp" aria-label="WhatsApp">
+    <svg width="27" height="27" viewBox="0 0 24 24" fill="white" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
   </a>
 </div>
-<div class="toast" id="toast"></div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
-/* ══ DADOS DO SITE ══ */
+/* ══ DADOS ══ */
 const REGIAO_GERAL='Brazlândia,Cascalheira,Padre Lúcio,Chapadinha,Incra 8';
 const REGIAO_ENTORNO='Vendinha,Ouro Verde,Água Lindas';
 const REGIAO_CURRALINHO='Curralinho';
 
-const EX = {
+const EX={
   config:{wpp:'5561999425963',wppDisplay:'(61) 9 9942-5963',endereco:'Qd. 2, Lt. 13 Comercial, Setor Veredas — Brazlândia, DF',insta:'https://www.instagram.com/worknettelecom/',instaDisplay:'@worknettelecom',fb:'https://www.facebook.com/WorknetSI',heroCity:'Brazlândia',heroDesc:'Conexão estável, rápida e atendimento local. Somos daqui — e quem está pertinho cuida melhor de você.',statPreco:'R$60',statCidades:'9'},
   planos:[
     {mega:'30',extras:'Somente internet',preco:'R$ 60,00',nota:'com desconto de pontualidade · após o vencimento R$ 69,99 · fidelidade de 12 meses',features:'Fibra ótica\nAdesão gratuita\nEquipamento em comodato\nSuporte local',featured:'nao',cidades:REGIAO_GERAL},
@@ -496,14 +620,13 @@ const EX = {
   ]
 };
 
-let DADOS = null;
-let LOC_ATUAL = 'Brazlândia';
+let DADOS=null;
+let LOC_ATUAL='Brazlândia';
 
-/* ══ UTILS ══ */
+/* ── UTILS ── */
 function parsePreco(str){
   if(!str)return 0;
-  const n=str.replace(/[^\d,]/g,'').replace(',','.');
-  return parseFloat(n)||0;
+  return parseFloat(str.replace(/[^\d,]/g,'').replace(',','.'))||0;
 }
 function formatPriceHtml(str){
   const n=parsePreco(str);
@@ -517,57 +640,46 @@ function formatPriceHtml(str){
       <span class="plan-price-period">/mês</span>
     </div>`;
 }
-function escHtml(s){
-  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-}
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+function norm(s){return String(s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').trim()}
 function toast(msg){
   const t=document.getElementById('toast');
   t.textContent=msg;t.classList.add('show');
   setTimeout(()=>t.classList.remove('show'),2500);
 }
 
-/* ══ LOGOS STREAMING ══ */
+/* ── STREAMING LOGOS ── */
 const LOGO_BASE='assets/logos/';
 const STREAM_REMOTE={
-  'disney+':     'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Disney%2B_logo.svg/200px-Disney%2B_logo.svg.png',
-  'disney':      'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Disney%2B_logo.svg/200px-Disney%2B_logo.svg.png',
-  'hbo max':     'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/HBO_Max_Logo.svg/200px-HBO_Max_Logo.svg.png',
-  'hbo':         'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/HBO_Max_Logo.svg/200px-HBO_Max_Logo.svg.png',
+  'disney+':'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Disney%2B_logo.svg/200px-Disney%2B_logo.svg.png',
+  'disney':'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Disney%2B_logo.svg/200px-Disney%2B_logo.svg.png',
+  'hbo max':'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/HBO_Max_Logo.svg/200px-HBO_Max_Logo.svg.png',
+  'hbo':'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/HBO_Max_Logo.svg/200px-HBO_Max_Logo.svg.png',
   'watch brasil':'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Watch_Brasil_logo.png/200px-Watch_Brasil_logo.png',
-  'watch':       'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Watch_Brasil_logo.png/200px-Watch_Brasil_logo.png',
-  'max':         'https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Max_logo.svg/200px-Max_logo.svg.png',
-  'paramount+':  'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Paramount%2B_logo.svg/200px-Paramount%2B_logo.svg.png',
-  'netflix':     'https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Netflix_2015_logo.svg/200px-Netflix_2015_logo.svg.png',
-  'prime video': 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Prime_Video.png/200px-Prime_Video.png',
+  'watch':'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Watch_Brasil_logo.png/200px-Watch_Brasil_logo.png',
+  'max':'https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Max_logo.svg/200px-Max_logo.svg.png',
+  'paramount+':'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Paramount%2B_logo.svg/200px-Paramount%2B_logo.svg.png',
+  'netflix':'https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Netflix_2015_logo.svg/200px-Netflix_2015_logo.svg.png',
+  'prime video':'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Prime_Video.png/200px-Prime_Video.png',
 };
 const STREAM_LOCAL={
-  'disney+':     'disney-plus.svg',
-  'disney':      'disney-plus.svg',
-  'hbo max':     'hbo-max.svg',
-  'hbo':         'hbo-max.svg',
-  'watch brasil':'watch-brasil.png',
-  'watch':       'watch-brasil.png',
-  'max':         'max-streaming.svg',
+  'disney+':'disney-plus.svg','disney':'disney-plus.svg',
+  'hbo max':'hbo-max.svg','hbo':'hbo-max.svg',
+  'watch brasil':'watch-brasil.png','watch':'watch-brasil.png',
+  'max':'max-streaming.svg',
 };
-
 function findStreamLogo(part){
-  const key=normStr(part);
+  const key=norm(part);
   const keys=Object.keys(STREAM_REMOTE).sort((a,b)=>b.length-a.length);
   for(const k of keys){
     if(key.includes(k)){
-      return{
-        src:STREAM_LOCAL[k]?LOGO_BASE+STREAM_LOCAL[k]:STREAM_REMOTE[k],
-        remote:STREAM_REMOTE[k],
-        label:part,
-        isWatch:k.includes('watch')
-      };
+      return{src:STREAM_LOCAL[k]?LOGO_BASE+STREAM_LOCAL[k]:STREAM_REMOTE[k],remote:STREAM_REMOTE[k],label:part,isWatch:k.includes('watch')};
     }
   }
   return null;
 }
-
 function buildStreamingHTML(extrasStr){
-  if(!extrasStr||normStr(extrasStr)==='somente internet')return'';
+  if(!extrasStr||norm(extrasStr)==='somente internet')return'';
   const hasOu=/\s+ou\s+/i.test(extrasStr);
   const parts=extrasStr.split(/\s+ou\s+|\s*\+\s*/i).map(s=>s.trim()).filter(Boolean);
   const tiles=[];
@@ -575,35 +687,26 @@ function buildStreamingHTML(extrasStr){
     const logo=findStreamLogo(p);
     if(logo){
       const cls=logo.isWatch?' class="logo-watch"':'';
-      tiles.push(`<img src="${logo.src}" alt="${escHtml(logo.label)}"${cls} loading="lazy" onerror="if(this.dataset.fallback!=='1'){this.dataset.fallback='1';this.src='${logo.remote}'}else{this.outerHTML='<span class=plan-extra-tag>${escHtml(p)}</span>'}">`);
+      tiles.push(`<img src="${logo.src}" alt="${esc(logo.label)}"${cls} loading="lazy" onerror="if(this.dataset.fb!=='1'){this.dataset.fb='1';this.src='${logo.remote}'}else{this.outerHTML='<span class=plan-extra-tag>${esc(p)}</span>'}">`);
     }else{
-      tiles.push(`<span class="plan-extra-tag">${escHtml(p)}</span>`);
+      tiles.push(`<span class="plan-extra-tag">${esc(p)}</span>`);
     }
-    if(i<parts.length-1){
-      tiles.push(`<span class="plan-extra-tag">${hasOu?'ou':'+'}</span>`);
-    }
+    if(i<parts.length-1)tiles.push(`<span class="plan-extra-tag">${hasOu?'ou':'+'}</span>`);
   });
   return`<div class="plan-streaming-logos">${tiles.join('')}</div>`;
 }
-
-function normStr(s){
-  return String(s).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').trim();
+function isDestaque(p){
+  return p.mega==='500'&&norm(p.extras||'')==='somente internet'&&Math.abs(parsePreco(p.preco)-99.99)<0.01;
 }
-
-function isPlanoDestaque(p){
-  return p.mega==='500'&&normStr(p.extras||'')==='somente internet'&&Math.abs(parsePreco(p.preco)-99.99)<0.01;
-}
-
-function ordenarPlanos(planos){
-  return [...planos].sort((a,b)=>{
-    const da=isPlanoDestaque(a)?0:1;
-    const db=isPlanoDestaque(b)?0:1;
+function ordenar(planos){
+  return[...planos].sort((a,b)=>{
+    const da=isDestaque(a)?0:1,db=isDestaque(b)?0:1;
     if(da!==db)return da-db;
     return parsePreco(a.preco)-parsePreco(b.preco);
   });
 }
 
-/* ══ RENDER ══ */
+/* ── RENDER ── */
 function render(d){
   DADOS=d;
   const cfg=d.config;
@@ -611,11 +714,11 @@ function render(d){
 
   document.getElementById('hero-city').textContent=cfg.heroCity||'Brazlândia';
   document.getElementById('hero-desc').textContent=cfg.heroDesc||'';
-  ['nav-wpp','float-wpp','f-wpp','mobile-wpp','hero-wpp'].forEach(id=>{
+  ['nav-wpp','float-wpp','f-wpp','f-wpp2','mobile-wpp','hero-wpp'].forEach(id=>{
     const el=document.getElementById(id);if(el)el.href=wl;
   });
   document.getElementById('stat-preco').textContent=cfg.statPreco||'R$60';
-  document.getElementById('stat-cidades').textContent=cfg.statCidades||'8+';
+  document.getElementById('stat-cidades').textContent=cfg.statCidades||'9';
 
   document.getElementById('c-wpp').href=wl;
   document.getElementById('c-wpp').textContent=cfg.wppDisplay||cfg.wpp;
@@ -623,37 +726,34 @@ function render(d){
   document.getElementById('c-ig').href=cfg.insta||'#';
   document.getElementById('c-ig').textContent=cfg.instaDisplay||cfg.insta;
   document.getElementById('c-fb').href=cfg.fb||'#';
-  document.getElementById('f-ig').href=cfg.insta||'#';
-  document.getElementById('f-fb').href=cfg.fb||'#';
-  document.getElementById('f-end').textContent=cfg.endereco||'';
+  ['f-ig','f-ig2'].forEach(id=>{const el=document.getElementById(id);if(el)el.href=cfg.insta||'#'});
+  ['f-fb','f-fb2'].forEach(id=>{const el=document.getElementById(id);if(el)el.href=cfg.fb||'#'});
 
   const cwl=wl+'?text='+encodeURIComponent('Olá! Gostaria de saber se vocês têm cobertura na minha região.');
   document.getElementById('cov-wpp').href=cwl;
 
   const comPlanos=new Set(d.planos.flatMap(p=>(p.cidades||'').split(',').map(c=>c.trim()).filter(Boolean)));
-  const ordemCidades=d.cidades.map(row=>row.cidade||Object.values(row)[0]).filter(c=>comPlanos.has(c));
+  const ordemCidades=d.cidades.map(r=>r.cidade||Object.values(r)[0]).filter(c=>comPlanos.has(c));
   comPlanos.forEach(c=>{if(!ordemCidades.includes(c))ordemCidades.push(c)});
   if(!ordemCidades.includes(LOC_ATUAL))LOC_ATUAL=ordemCidades[0]||'Brazlândia';
+
   const pp=document.getElementById('loc-pills');
   pp.innerHTML='';
   ordemCidades.forEach(c=>{
     const b=document.createElement('button');
     b.className='loc-pill'+(c===LOC_ATUAL?' active':'');
     b.dataset.loc=c;b.textContent=c;
+    b.setAttribute('aria-pressed',c===LOC_ATUAL?'true':'false');
     b.onclick=function(){filtrarLoc(c,this)};
     pp.appendChild(b);
   });
 
-  const cg=document.getElementById('cov-grid');
-  cg.innerHTML=d.cidades.map(row=>{
+  document.getElementById('cov-grid').innerHTML=d.cidades.map(row=>{
     const nome=row.cidade||Object.values(row)[0];
     const qtd=d.planos.filter(p=>(p.cidades||'').split(',').map(x=>x.trim()).includes(nome)).length;
-    return`<div class="cov-card" onclick="filtrarLocEIr('${escHtml(nome)}')" role="button" tabindex="0" onkeydown="if(event.key==='Enter')filtrarLocEIr('${escHtml(nome)}')" title="Ver planos de ${escHtml(nome)}">
-      <span class="cov-dot" aria-hidden="true"></span>
-      <div>
-        <div class="cov-name">${escHtml(nome)}</div>
-        <div class="cov-plans">${qtd} plano${qtd!==1?'s':''} disponível${qtd!==1?'is':''}</div>
-      </div>
+    return`<div class="cov-card" onclick="filtrarLocEIr('${esc(nome)}')" role="button" tabindex="0" onkeydown="if(event.key==='Enter')filtrarLocEIr('${esc(nome)}')" title="Ver planos de ${esc(nome)}">
+      <span class="cov-pulse" aria-hidden="true"></span>
+      <div><div class="cov-name">${esc(nome)}</div><div class="cov-plans">${qtd} plano${qtd!==1?'s':''} disponível${qtd!==1?'is':''}</div></div>
     </div>`;
   }).join('');
 
@@ -666,45 +766,35 @@ function renderPlanos(loc){
   const countEl=document.getElementById('plans-count');
   if(!DADOS)return;
   const cfg=DADOS.config;
-  const planos=DADOS.planos;
+  const filtrados=ordenar(DADOS.planos.filter(p=>(p.cidades||'').split(',').map(c=>c.trim()).includes(loc)));
 
-  const filtrados=ordenarPlanos(planos.filter(p=>(p.cidades||'').split(',').map(c=>c.trim()).includes(loc)));
-
-  if(filtrados.length===0){
-    grid.innerHTML='';
-    empty.classList.add('show');
-    countEl.textContent='';
-    const ewl='https://wa.me/'+cfg.wpp+'?text='+encodeURIComponent('Olá! Gostaria de saber os planos disponíveis em '+loc+'.');
-    document.getElementById('plans-empty-wpp').href=ewl;
+  if(!filtrados.length){
+    grid.innerHTML='';empty.classList.add('show');countEl.textContent='';
+    document.getElementById('plans-empty-wpp').href='https://wa.me/'+cfg.wpp+'?text='+encodeURIComponent('Olá! Gostaria de saber os planos em '+loc+'.');
     return;
   }
   empty.classList.remove('show');
-  countEl.textContent=filtrados.length+' plano'+(filtrados.length!==1?'s':'')+' encontrado'+(filtrados.length!==1?'s':'')+' em '+loc;
+  countEl.textContent=filtrados.length+' plano'+(filtrados.length!==1?'s':'')+' em '+loc;
 
-  grid.innerHTML=filtrados.map((p,idx)=>{
-    const feat=isPlanoDestaque(p);
-    const feats=(p.features||'').split('\n').filter(f=>f.trim()).map(f=>`<li>${escHtml(f.trim())}</li>`).join('');
+  grid.innerHTML=filtrados.map(p=>{
+    const dest=isDestaque(p);
+    const feats=(p.features||'').split('\n').filter(f=>f.trim()).map(f=>`<li>${esc(f.trim())}</li>`).join('');
     const extras=buildStreamingHTML(p.extras||'');
     const msg=encodeURIComponent('Olá! Tenho interesse no plano de '+p.mega+' Mega'+(p.extras&&p.extras.toLowerCase()!=='somente internet'?' + '+p.extras:'')+' por '+p.preco+'.');
     const wlink='https://wa.me/'+cfg.wpp+'?text='+msg;
-    const badge=feat?'Oferta destaque':'Worknet fibra';
-    const streamingLabel=extras&&p.extras&&normStr(p.extras)!=='somente internet'?`<p class="plan-streaming">com ${escHtml(p.extras)}</p>`:'';
-    return`<article class="plan-card${feat?' featured':''}">
-      ${feat?`<span class="plan-badge">${escHtml(badge)}</span>`:''}
-      <div class="plan-brand">Worknet <span>fibra</span></div>
+    const streamLabel=extras&&p.extras&&norm(p.extras)!=='somente internet'?`<p class="plan-streaming">com ${esc(p.extras)}</p>`:'';
+    return`<article class="plan-card${dest?' featured':''}" role="listitem">
+      ${dest?'<span class="plan-badge">Oferta destaque</span>':''}
+      <div class="plan-brand">Worknet <strong>fibra</strong></div>
       <div class="plan-speed-line">
-        <span class="plan-speed-num">${escHtml(p.mega)}</span>
+        <span class="plan-speed-num">${esc(p.mega)}</span>
         <span class="plan-speed-unit">MEGA</span>
       </div>
-      ${streamingLabel}
-      ${extras}
+      ${streamLabel}${extras}
       <hr class="plan-divider">
-      <div class="plan-price-block">
-        ${formatPriceHtml(p.preco)}
-        <p class="plan-price-note">${escHtml(p.nota)}</p>
-      </div>
+      <div class="plan-price-block">${formatPriceHtml(p.preco)}<p class="plan-price-note">${esc(p.nota)}</p></div>
       <ul class="plan-feats">${feats}</ul>
-      <a href="${wlink}" class="plan-cta" target="_blank" rel="noopener">Assinar</a>
+      <a href="${wlink}" class="plan-cta" target="_blank" rel="noopener">Assinar agora</a>
     </article>`;
   }).join('');
 }
@@ -712,8 +802,9 @@ function renderPlanos(loc){
 function filtrarLoc(loc,btn){
   LOC_ATUAL=loc;
   document.querySelectorAll('.loc-pill').forEach(p=>{
-    p.classList.remove('active');
-    if(p.dataset.loc===loc)p.classList.add('active');
+    const active=p.dataset.loc===loc;
+    p.classList.toggle('active',active);
+    p.setAttribute('aria-pressed',active?'true':'false');
   });
   renderPlanos(loc);
 }
@@ -727,45 +818,143 @@ function filtrarLocEIr(loc){
 function copiarTelefone(){
   if(!DADOS)return;
   const num=DADOS.config.wppDisplay||DADOS.config.wpp;
-  navigator.clipboard.writeText(num).then(()=>toast('Número copiado!')).catch(()=>toast('Não foi possível copiar'));
+  navigator.clipboard?.writeText(num).then(()=>toast('Número copiado!')).catch(()=>toast('Não foi possível copiar'));
 }
 
-/* ══ MENU MOBILE ══ */
+/* ── MENU MOBILE ── */
 function fecharMenu(){
-  document.getElementById('mobile-menu').classList.remove('open');
-  document.getElementById('nav-toggle').setAttribute('aria-expanded','false');
-  document.getElementById('mobile-menu').setAttribute('aria-hidden','true');
+  const menu=document.getElementById('mobile-menu');
+  const toggle=document.getElementById('nav-toggle');
+  menu.classList.remove('open');
+  toggle.setAttribute('aria-expanded','false');
+  menu.setAttribute('aria-hidden','true');
+  toggle.innerHTML='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>';
 }
 document.getElementById('nav-toggle').addEventListener('click',()=>{
   const menu=document.getElementById('mobile-menu');
+  const toggle=document.getElementById('nav-toggle');
   const open=menu.classList.toggle('open');
-  document.getElementById('nav-toggle').setAttribute('aria-expanded',open);
+  toggle.setAttribute('aria-expanded',open);
   menu.setAttribute('aria-hidden',!open);
-  document.getElementById('nav-toggle').textContent=open?'✕':'☰';
+  toggle.innerHTML=open
+    ?'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>'
+    :'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>';
+});
+document.addEventListener('click',e=>{
+  if(!document.getElementById('mobile-menu').contains(e.target)&&!document.getElementById('nav-toggle').contains(e.target)){
+    fecharMenu();
+  }
 });
 
-/* ══ FAQ ══ */
+/* ── FAQ ── */
 document.querySelectorAll('.faq-q').forEach(btn=>{
   btn.addEventListener('click',()=>{
     const item=btn.parentElement;
     const wasOpen=item.classList.contains('open');
-    document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
-    if(!wasOpen)item.classList.add('open');
+    document.querySelectorAll('.faq-item').forEach(i=>{
+      i.classList.remove('open');
+      i.querySelector('.faq-q')?.setAttribute('aria-expanded','false');
+    });
+    if(!wasOpen){
+      item.classList.add('open');
+      btn.setAttribute('aria-expanded','true');
+    }
   });
 });
 
-/* ══ SCROLL REVEAL + BACK TOP ══ */
+/* ── SCROLL ── */
 const revealObs=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')});
-},{threshold:.12});
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');revealObs.unobserve(e.target)}});
+},{threshold:.1});
 document.querySelectorAll('.reveal').forEach(el=>revealObs.observe(el));
 
 window.addEventListener('scroll',()=>{
-  document.getElementById('back-top').classList.toggle('show',window.scrollY>400);
+  document.getElementById('back-top').classList.toggle('show',window.scrollY>500);
 },{passive:true});
 
-/* ══ INIT ══ */
-window.addEventListener('DOMContentLoaded',()=>{render(EX)});
+/* ── INIT ── */
+window.addEventListener('DOMContentLoaded',()=>{
+  render(EX);
+  initHeroCanvas();
+});
+
+/* ── HERO CANVAS ANIMATION ── */
+function initHeroCanvas(){
+  const canvas=document.getElementById('hero-canvas');
+  if(!canvas)return;
+  const ctx=canvas.getContext('2d');
+  let W,H,particles,animId;
+  const COUNT=72,DIST=140,SPEED=.45;
+
+  function resize(){
+    const hero=canvas.parentElement;
+    W=canvas.width=hero.offsetWidth;
+    H=canvas.height=hero.offsetHeight;
+  }
+
+  function mkParticle(){
+    return{
+      x:Math.random()*W,y:Math.random()*H,
+      vx:(Math.random()-.5)*SPEED,vy:(Math.random()-.5)*SPEED,
+      r:Math.random()*1.6+.6,
+      a:Math.random()
+    };
+  }
+
+  function init(){
+    resize();
+    particles=Array.from({length:COUNT},mkParticle);
+  }
+
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    /* lines */
+    for(let i=0;i<particles.length;i++){
+      for(let j=i+1;j<particles.length;j++){
+        const dx=particles[i].x-particles[j].x;
+        const dy=particles[i].y-particles[j].y;
+        const d=Math.sqrt(dx*dx+dy*dy);
+        if(d<DIST){
+          const a=(1-d/DIST)*.35;
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x,particles[i].y);
+          ctx.lineTo(particles[j].x,particles[j].y);
+          ctx.strokeStyle=`rgba(126,180,255,${a})`;
+          ctx.lineWidth=.8;
+          ctx.stroke();
+        }
+      }
+    }
+    /* dots */
+    particles.forEach(p=>{
+      ctx.beginPath();
+      ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle=`rgba(180,210,255,${p.a*.9+.1})`;
+      ctx.fill();
+      p.x+=p.vx;p.y+=p.vy;
+      if(p.x<-10)p.x=W+10;
+      if(p.x>W+10)p.x=-10;
+      if(p.y<-10)p.y=H+10;
+      if(p.y>H+10)p.y=-10;
+    });
+    animId=requestAnimationFrame(draw);
+  }
+
+  init();
+  draw();
+
+  const ro=new ResizeObserver(()=>{resize()});
+  ro.observe(canvas.parentElement);
+
+  /* pause when hero not visible */
+  const io=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){if(!animId)draw()}
+      else{cancelAnimationFrame(animId);animId=null;}
+    });
+  },{threshold:0});
+  io.observe(canvas.parentElement);
+}
 </script>
 </body>
 </html>
