@@ -196,6 +196,7 @@ section{padding:5rem 2rem}
 .plan-addon-box svg{width:11px;height:11px;stroke:white;fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;opacity:0;transition:opacity var(--trans)}
 .plan-addon-input:checked~.plan-addon-box{background:var(--blue);border-color:var(--blue)}
 .plan-addon-input:checked~.plan-addon-box svg{opacity:1}
+.plan-addon-input:focus-visible~.plan-addon-box{outline:2px solid var(--blue);outline-offset:2px}
 .plan-addon-body{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
 .plan-addon-title{font-size:12.5px;font-weight:700;color:var(--ink);line-height:1.3}
 .plan-addon-sub{font-size:10.5px;color:var(--muted);line-height:1.4}
@@ -822,7 +823,7 @@ function renderPlanos(loc){
       </div>
       ${streamLabel}${extras}
       <hr class="plan-divider">
-      <div class="plan-price-block">${formatPriceHtml(p.preco)}<p class="plan-price-note">${esc(p.nota)}</p></div>
+      <div class="plan-price-block" aria-live="polite" aria-atomic="true">${formatPriceHtml(p.preco)}<p class="plan-price-note">${esc(p.nota)}</p></div>
       <ul class="plan-feats">${feats}</ul>
       <label class="plan-addon">
         <input type="checkbox" class="plan-addon-input" onchange="toggleRoteador(this)" data-base="${parsePreco(p.preco)}" data-addon="${addonPreco}" data-mega="${esc(p.mega)}" data-extras="${esc(p.extras||'')}" data-wpp="${cfg.wpp}">
