@@ -8,10 +8,29 @@
 <meta property="og:title" content="Worknet Telecom | Internet Fibra Ótica">
 <meta property="og:description" content="Internet 100% Fibra Ótica em Brazlândia e região. Planos a partir de R$60.">
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://worknettelecom.com.br/">
+<meta property="og:image" content="https://worknettelecom.com.br/assets/images/hero-banner-fiber.jpg">
+<meta property="og:locale" content="pt_BR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#1040c1">
+<link rel="canonical" href="https://worknettelecom.com.br/">
 <link rel="icon" href="https://static.wixstatic.com/media/6baf7f_efd3c7b6dff74868a512df7ad14be321~mv2.png">
+<link rel="preload" as="image" href="assets/images/hero-banner.jpg" fetchpriority="high">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"InternetServiceProvider",
+  "name":"Worknet Telecom",
+  "url":"https://worknettelecom.com.br/",
+  "telephone":"+55 61 99942-5963",
+  "areaServed":["Brazlândia","Vendinha","Ouro Verde","Águas Lindas","Cascalheira","Padre Lúcio","Chapadinha","Incra 8","Curralinho"],
+  "address":{"@type":"PostalAddress","streetAddress":"Qd. 2, Lt. 13 Comercial, Setor Veredas","addressLocality":"Brazlândia","addressRegion":"DF","addressCountry":"BR"},
+  "sameAs":["https://www.instagram.com/worknettelecom/","https://www.facebook.com/WorknetSI"]
+}
+</script>
 <style>
 /* ── TOKENS ── */
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
@@ -100,6 +119,13 @@ nav{position:sticky;top:0;z-index:200;height:66px;display:flex;align-items:cente
 .hero-stat strong{font-size:22px;font-weight:900;color:white;letter-spacing:-.5px;line-height:1}
 .hero-stat span{font-size:12px;color:rgba(255,255,255,.45);font-weight:500}
 
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .reveal{opacity:1;transform:none;transition:none}
+  .hero-bg,.plan-card,.why-card,.pinfo-card{transition:none}
+  #hero-canvas{display:none}
+}
+
 /* ── PERKS ── */
 .perks{background:white;border-bottom:1px solid var(--border)}
 .perks-inner{max-width:1240px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr)}
@@ -138,6 +164,7 @@ section{padding:5rem 2rem}
 .loc-pill.active{background:var(--blue);border-color:var(--blue);color:white;box-shadow:var(--shadow-blue)}
 
 .plans-count{font-size:12.5px;color:var(--muted);text-align:center;margin:1rem 0;font-weight:500}
+.plans-helper{display:none;font-size:12px;color:var(--muted);text-align:center;margin:-.35rem 0 .25rem}
 
 /* ── PLANS GRID (desktop) ── */
 .plans-carousel-wrap{padding:0 2rem}
@@ -151,15 +178,15 @@ section{padding:5rem 2rem}
   .plans-carousel-wrap{padding:0}
   .plans-carousel{display:flex;flex-wrap:nowrap;grid-template-columns:none;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding:1.25rem;padding:1rem 1.25rem 1.5rem;gap:14px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
   .plans-carousel::-webkit-scrollbar{display:none}
-  .plan-card{flex:0 0 78vw;max-width:300px;scroll-snap-align:start}
+  .plan-card{flex:0 0 84vw;max-width:330px;scroll-snap-align:center}
+  .plans-helper{display:block}
 }
 .plan-card:hover{box-shadow:var(--shadow-lg);border-color:var(--border2);transform:translateY(-3px)}
 .plan-card.featured{border-color:var(--blue);border-width:2px;box-shadow:0 0 0 4px rgba(16,64,193,.06),var(--shadow)}
 .plan-card.featured:hover{box-shadow:0 0 0 4px rgba(16,64,193,.1),var(--shadow-lg)}
 .plan-badge{display:inline-flex;align-items:center;gap:5px;background:var(--blue);color:white;font-size:10.5px;font-weight:800;padding:5px 13px;border-radius:50px;text-transform:uppercase;letter-spacing:.6px;margin:0 auto .9rem;align-self:center}
 .plan-badge::before{content:'★';font-size:9px;opacity:.8}
-.plan-brand{font-size:12px;font-weight:600;color:var(--muted2);margin-bottom:.5rem;letter-spacing:.3px}
-.plan-brand strong{color:var(--blue);font-weight:800}
+.plan-brand{display:none}
 .plan-speed-line{display:flex;align-items:baseline;justify-content:center;gap:4px;margin-bottom:.25rem}
 .plan-speed-num{font-size:64px;font-weight:900;color:var(--ink);line-height:1;letter-spacing:-4px}
 .plan-speed-unit{font-size:16px;font-weight:800;color:var(--muted);letter-spacing:.5px;margin-bottom:4px}
@@ -184,12 +211,12 @@ section{padding:5rem 2rem}
 
 /* Features */
 .plan-feats{list-style:none;margin:0 auto 1rem;flex:1;width:100%;max-width:220px;text-align:left}
-.plan-feats li{font-size:12.5px;color:var(--ink2);padding:5.5px 0;display:flex;align-items:flex-start;gap:8px;line-height:1.4;border-bottom:1px solid var(--surface)}
+.plan-feats li{font-size:12.5px;color:var(--ink2);padding:4.5px 0;display:flex;align-items:flex-start;gap:8px;line-height:1.35}
 .plan-feats li:last-child{border-bottom:none}
 .plan-feats li::before{content:'';width:17px;height:17px;border-radius:50%;background:var(--blue);flex-shrink:0;margin-top:.5px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3 8l3.5 3.5L13 5' stroke='white' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:center;background-size:10px}
 
 /* Addon (roteador adicional) */
-.plan-addon{position:relative;display:flex;align-items:flex-start;gap:10px;text-align:left;background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius-lg);padding:10px 12px;margin:0 auto .9rem;width:100%;max-width:220px;cursor:pointer;transition:border-color var(--trans),background var(--trans)}
+.plan-addon{position:relative;display:flex;align-items:center;gap:9px;text-align:left;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:9px 11px;margin:0 auto .9rem;width:100%;max-width:220px;cursor:pointer;transition:border-color var(--trans),background var(--trans)}
 .plan-addon:hover{border-color:var(--blue)}
 .plan-addon-input{position:absolute;opacity:0;width:0;height:0}
 .plan-addon-box{width:18px;height:18px;border-radius:5px;border:1.5px solid var(--border2);background:white;flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;transition:background var(--trans),border-color var(--trans)}
@@ -199,7 +226,7 @@ section{padding:5rem 2rem}
 .plan-addon-input:focus-visible~.plan-addon-box{outline:2px solid var(--blue);outline-offset:2px}
 .plan-addon-body{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
 .plan-addon-title{font-size:12.5px;font-weight:700;color:var(--ink);line-height:1.3}
-.plan-addon-sub{font-size:10.5px;color:var(--muted);line-height:1.4}
+.plan-addon-sub{display:none}
 .plan-addon-price{font-size:11.5px;font-weight:800;color:var(--blue);align-self:flex-end;margin-top:1px}
 
 /* CTA */
@@ -435,6 +462,7 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,.06);padding:
       <div class="loc-pills" id="loc-pills" role="group" aria-label="Selecionar localidade"></div>
     </div>
     <p class="plans-count" id="plans-count" aria-live="polite"></p>
+    <p class="plans-helper" aria-hidden="true">Deslize para comparar os planos →</p>
     <div class="plans-carousel-wrap">
       <div class="plans-carousel" id="plans-grid" role="list" aria-label="Planos disponíveis">
         <div class="skeleton" aria-hidden="true"></div>
@@ -922,6 +950,10 @@ window.addEventListener('DOMContentLoaded',()=>{
 function initHeroCanvas(){
   const canvas=document.getElementById('hero-canvas');
   if(!canvas)return;
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches||navigator.connection?.saveData){
+    canvas.remove();
+    return;
+  }
   const ctx=canvas.getContext('2d');
   let W,H,particles,animId;
   const COUNT=72,DIST=140,SPEED=.45;
