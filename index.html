@@ -164,8 +164,6 @@ section{padding:5rem 2rem}
 .loc-pill.active{background:var(--blue);border-color:var(--blue);color:white;box-shadow:var(--shadow-blue)}
 
 .plans-count{font-size:12.5px;color:var(--muted);text-align:center;margin:1rem 0;font-weight:500}
-.credit-notice{max-width:520px;margin:0 auto 1rem;padding:10px 14px;border:1px solid #F4D38A;border-radius:10px;background:#FFF8E8;color:#75540F;text-align:center;font-size:12px;line-height:1.4}
-.credit-notice strong{color:#5A4008}
 .plans-helper{display:none;font-size:12px;color:var(--muted);text-align:center;margin:-.35rem 0 .25rem}
 
 /* ── PLANS GRID (desktop) ── */
@@ -540,7 +538,6 @@ nav{height:74px;padding:0 clamp(1.25rem,4vw,3.5rem);border-bottom-color:rgba(16,
       <div class="loc-pills" id="loc-pills" role="group" aria-label="Selecionar localidade"></div>
     </div>
     <p class="plans-count" id="plans-count" aria-live="polite"></p>
-    <p class="credit-notice"><strong>Importante:</strong> a contratação do plano está sujeita à análise de crédito.</p>
     <p class="plans-helper" aria-hidden="true">Deslize para comparar os planos →</p>
     <div class="plans-carousel-wrap">
       <div class="plans-carousel" id="plans-grid" role="list" aria-label="Planos disponíveis">
@@ -931,7 +928,7 @@ function renderPlanos(loc){
       </div>
       ${streamLabel}${extras}
       <hr class="plan-divider">
-      <div class="plan-price-block" aria-live="polite" aria-atomic="true">${formatPriceHtml(p.preco)}<p class="plan-price-note">${esc(p.nota)}</p></div>
+      <div class="plan-price-block" aria-live="polite" aria-atomic="true">${formatPriceHtml(p.preco)}<p class="plan-price-note">${esc(p.nota)} · sujeito à análise de crédito</p></div>
       <ul class="plan-feats">${feats}</ul>
       <label class="plan-addon">
         <input type="checkbox" class="plan-addon-input" onchange="toggleRoteador(this)" data-base="${parsePreco(p.preco)}" data-addon="${addonPreco}" data-mega="${esc(p.mega)}" data-extras="${esc(p.extras||'')}" data-wpp="${cfg.wpp}">
