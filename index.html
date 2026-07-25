@@ -924,7 +924,7 @@ function renderPlanos(loc){
       <div class="plan-brand">Worknet <strong>fibra</strong></div>
       <div class="plan-speed-line">
         <span class="plan-speed-num">${esc(p.mega)}</span>
-        <span class="plan-speed-unit">MEGA</span>
+        <span class="plan-speed-unit">${String(p.mega).toUpperCase().includes('GIGA') ? '' : 'MEGA'}</span>
       </div>
       ${streamLabel}${extras}
       <hr class="plan-divider">
