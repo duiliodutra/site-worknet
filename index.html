@@ -190,10 +190,12 @@ section{padding:5rem 2rem}
 .plan-speed-line{display:flex;align-items:baseline;justify-content:center;gap:4px;margin-bottom:.25rem}
 .plan-speed-num{font-size:64px;font-weight:900;color:var(--ink);line-height:1;letter-spacing:-4px}
 .plan-speed-unit{font-size:16px;font-weight:800;color:var(--muted);letter-spacing:.5px;margin-bottom:4px}
-.plan-streaming{font-size:12.5px;font-weight:600;color:var(--muted);margin-bottom:.6rem;line-height:1.3}
-.plan-streaming-logos{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px;margin-bottom:.8rem;min-height:30px}
-.plan-streaming-logos img{height:26px;width:auto;max-width:110px;object-fit:contain}
-.plan-streaming-logos img.logo-watch{height:30px;max-width:130px}
+.plan-streaming{font-size:12.5px;font-weight:700;color:var(--blue);margin:0 0 .55rem;line-height:1.35}
+.plan-streaming strong{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.7px;color:var(--muted2);margin-bottom:3px}
+.plan-streaming-logos{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;width:100%;margin:0 0 .85rem}
+.plan-streaming-option{height:43px;display:flex;align-items:center;justify-content:center;background:#fff;border:1px solid var(--border);border-radius:9px;padding:6px}
+.plan-streaming-option img{height:25px;width:auto;max-width:104px;object-fit:contain}
+.plan-streaming-option img.logo-watch{height:28px;max-width:120px}
 .plan-extra-tag{font-size:11px;font-weight:700;color:var(--muted);background:var(--surface);padding:3px 8px;border-radius:4px}
 .plan-locs{display:flex;flex-wrap:wrap;justify-content:center;gap:5px;margin-bottom:.7rem}
 .plan-loc-tag{background:var(--blue-xlight);color:var(--blue);font-size:10px;font-weight:700;padding:3px 9px;border-radius:20px;text-transform:uppercase;letter-spacing:.4px}
@@ -822,9 +824,9 @@ function buildStreamingHTML(extrasStr){
     const logo=findStreamLogo(p);
     if(logo){
       const cls=logo.isWatch?' class="logo-watch"':'';
-      tiles.push(`<img src="${logo.src}" alt="${esc(logo.label)}"${cls} loading="lazy" onerror="if(this.dataset.fb!=='1'){this.dataset.fb='1';this.src='${logo.remote}'}else{this.outerHTML='<span class=plan-extra-tag>${esc(p)}</span>'}">`);
+      tiles.push(`<span class="plan-streaming-option"><img src="${logo.src}" alt="${esc(logo.label)}"${cls} loading="lazy" onerror="if(this.dataset.fb!=='1'){this.dataset.fb='1';this.src='${logo.remote}'}else{this.outerHTML='<span class=plan-extra-tag>${esc(p)}</span>'}"></span>`);
     }else{
-      tiles.push(`<span class="plan-extra-tag">${esc(p)}</span>`);
+      tiles.push(`<span class="plan-streaming-option"><span class="plan-extra-tag">${esc(p)}</span></span>`);
     }
   });
   return`<div class="plan-streaming-logos">${tiles.join('')}</div>`;
@@ -916,7 +918,7 @@ function renderPlanos(loc){
     const extras=buildStreamingHTML(p.extras||'');
     const msg=encodeURIComponent('Olá! Tenho interesse no plano de '+p.mega+' Mega'+(p.extras&&p.extras.toLowerCase()!=='somente internet'?' + '+p.extras:'')+' por '+p.preco+'.');
     const wlink='https://wa.me/'+cfg.wpp+'?text='+msg;
-    const streamLabel=extras&&p.extras&&norm(p.extras)!=='somente internet'?`<p class="plan-streaming">com ${esc(p.extras)}</p>`:'';
+    const streamLabel=extras&&p.extras&&norm(p.extras)!=='somente internet'?`<p class="plan-streaming"><strong>Streaming incluso</strong>Escolha apenas 1 opção:</p>`:'';
     return`<article class="plan-card${dest?' featured':''}" role="listitem">
       ${dest?'<span class="plan-badge">Oferta destaque</span>':''}
       <div class="plan-brand">Worknet <strong>fibra</strong></div>
