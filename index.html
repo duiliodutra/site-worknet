@@ -792,12 +792,16 @@ const STREAM_REMOTE={
   'paramount+':'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Paramount%2B_logo.svg/200px-Paramount%2B_logo.svg.png',
   'netflix':'https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Netflix_2015_logo.svg/200px-Netflix_2015_logo.svg.png',
   'prime video':'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Prime_Video.png/200px-Prime_Video.png',
+  'globoplay':'https://upload.wikimedia.org/wikipedia/commons/b/b0/Globoplay_logo_2020.svg',
+  'apple tv':'https://upload.wikimedia.org/wikipedia/commons/f/f7/Apple_TV_logo.svg',
 };
 const STREAM_LOCAL={
   'disney+':'disney-plus.svg','disney':'disney-plus.svg',
   'hbo max':'hbo-max.svg','hbo':'hbo-max.svg',
   'watch brasil':'watch-brasil.png','watch':'watch-brasil.png',
   'max':'max-streaming.svg',
+  'globoplay':'globoplay.svg',
+  'apple tv':'apple-tv.svg',
 };
 function findStreamLogo(part){
   const key=norm(part);
@@ -812,7 +816,7 @@ function findStreamLogo(part){
 function buildStreamingHTML(extrasStr){
   if(!extrasStr||norm(extrasStr)==='somente internet')return'';
   const hasOu=/\s+ou\s+/i.test(extrasStr);
-  const parts=extrasStr.split(/\s+ou\s+|\s*\+\s*/i).map(s=>s.trim()).filter(Boolean);
+  const parts=extrasStr.split(/\s+ou\s+|\s*,\s*|\s*\+\s*/i).map(s=>s.trim()).filter(Boolean);
   const tiles=[];
   parts.forEach((p,i)=>{
     const logo=findStreamLogo(p);
@@ -822,7 +826,6 @@ function buildStreamingHTML(extrasStr){
     }else{
       tiles.push(`<span class="plan-extra-tag">${esc(p)}</span>`);
     }
-    if(i<parts.length-1)tiles.push(`<span class="plan-extra-tag">${hasOu?'ou':'+'}</span>`);
   });
   return`<div class="plan-streaming-logos">${tiles.join('')}</div>`;
 }
